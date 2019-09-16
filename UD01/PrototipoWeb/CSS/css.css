@@ -1,0 +1,27 @@
+#header {
+    min-height: 10%;
+    display: flex;
+    background-color:#4B9DDA;
+}
+
+#logo {
+    margin-right: 30%;
+    float: left;
+}
+
+#menu {
+    width: 50%;
+    margin-top: 5%;
+}
+
+#navPrincipal li {
+    margin-right: 5%;
+    display: inline;
+    list-style: none;
+}
+
+
+#content {
+    margin-top: 5%;
+
+}
