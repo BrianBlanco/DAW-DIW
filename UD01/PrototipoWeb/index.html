@@ -5,44 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Creación de un prototipo</title>
-    <link rel="stylesheet" href="./CSS/css.css">
+    <!--<link rel="stylesheet" href="./CSS/css.css">-->
+    <style>
+        body {
+            background-image: url(https://i.pinimg.com/236x/58/53/24/5853244565934a13623301a62e4861a8--phone-backgrounds-iphone-wallpaper.jpg);
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        nav {
+            width: 30%;
+            margin-left: 70%;
+        }
+
+        li {
+            display: inline-block;
+            list-style: none;
+            margin-left: 5%;
+        }
+        
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        #divForm {
+            margin-left: 40%;
+        }
+
+        #divForm input {
+            display: inline-block;
+            margin-bottom: 3%;
+            margin-top: 1%;
+        }
+
+        #divForm label {
+            margin-left: 7%;
+        }
+    </style>
 </head>
 <body>
-    <div id="header">
-        <div id="logo">
-            <img src="https://picsum.photos/200" alt="Logotipo">
-        </div>
-
+    <header>
         <div id="menu">
+            <h1 id="tituloTienda">Tienda de algo</h1>
             <nav>
                 <ul id="navPrincipal">
-                    <li><a href="">Noticias</a></li>
-                    <li><a href=""></a>Contacto</li>
-                    <li><a href=""></a>Cuestionario</li>
-                    <li><a href="#"></a>Carrito</li>
+                    <li><a href="#">Noticias</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Cuestionario</a></li>
+                    <li><a href="#">Carrito</a></li>
                 </ul>
             </nav>
         </div>
-    </div>
-    
+    </header>
+
     <div id="content">
+        <div id="divForm">
+            <form action="index.php">
+                <label for="username">Username</label>
+                <br>
+                <input type="text" name="username" value="Username">
+                <br>
+                <label for="password">Password</label>
+                <br>
+                <input type="password" name="password" value="Password">
+            </form>
+
+        </div>
         <div id="InfoSobreLaTienda">
-            <h1>Tienda de algo</h1>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet nam voluptatem esse fugit 
             laboriosam beatae qui facere consectetur facilis, labore hic inventore quidem ducimus modi deleniti 
             suscipit maxime, repellendus sapiente?</p>
         </div>
-
-
-
-
-
-
     </div>
-
-
-
-
 
 </body>
 </html>
