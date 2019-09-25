@@ -1,0 +1,49 @@
+header {
+    background-color: #C0C0C0;
+    width: 45%;
+    margin-left: 25%;
+}
+
+header h1 {
+    margin-left: 17%;
+}
+
+li {
+    display: inline-block;
+    margin-left: 5%;
+    margin-bottom: 10%;
+    width: 25%;
+}
+
+li[class="navegacion"] a {
+    color : black;
+    text-decoration: none;
+}
+li:nth-child(3) {
+    background-image: url(./Icons/1.svg);
+    background-repeat: no-repeat;
+}
+li:nth-child(3) a {
+    margin-left: 15%;
+}
+
+@for $i from 0 to 5 {
+    li:nth-child(#{$i}) a {
+        border: 1px solid red;
+    }
+  }
+
+/*@for $i from 1 through 15 
+    li:nth-child(#{$i})
+        a {
+            background-image: url(./Icons/1.svg);
+        }
+*/
+
+/*.navegacion (@i) when (@i > 0) {
+    li:nth-child(@{i}) a {
+      content: "@{i}";
+    }
+    .navegacion(@i - 1);
+  }
+  */
