@@ -6,64 +6,57 @@ header {
 
 header h1 {
     margin-left: 17%;
+    margin-bottom: 5%;
 }
 
 li {
     display: inline-block;
     margin-left: 5%;
-    margin-bottom: 10%;
+    margin-bottom: 15%;
     width: 25%;
 }
 
 li[class="navegacion"] a {
     color : black;
     text-decoration: none;
-}
-li:nth-child(2) {
-    background-image: url(./Icons/1.svg);
-    background-repeat: no-repeat;
-}
-li:nth-child(2) a {
     margin-left: 15%;
 }
 
-li:nth-child(3) {
-    background-image: url(./Icons/1.svg);
+li:nth-child(2) {
+    background-image: url(./Icons/3.svg);
     background-repeat: no-repeat;
 }
-li:nth-child(3) a {
-    margin-left: 15%;
+
+li:nth-child(3) {
+    background-image: url(./Icons/5.svg);
+    background-repeat: no-repeat;
 }
 
 li:nth-child(4) {
     background-image: url(./Icons/1.svg);
     background-repeat: no-repeat;
 }
-li:nth-child(4) a {
-    margin-left: 15%;
-}
 
 li:nth-child(5) {
-    background-image: url(./Icons/1.svg);
+    background-image: url(./Icons/4.svg);
     background-repeat: no-repeat;
-}
-li:nth-child(5) a {
-    margin-left: 15%;
 }
 
 li:nth-child(6) {
-    background-image: url(./Icons/1.svg);
+    background-image: url(./Icons/2.svg);
     background-repeat: no-repeat;
 }
-li:nth-child(6) a {
-    margin-left: 15%;
+
+li:nth-child(7) {
+    background-image: url(./Icons/6.svg);
+    background-repeat: no-repeat;
 }
 
-@for $i from 0 to 5 {
+/*@for $i from 0 to 5 {
     li:nth-child(#{$i}) a {
         border: 1px solid red;
     }
-  }
+  }*/
 
 /*@for $i from 1 through 15 
     li:nth-child(#{$i})
