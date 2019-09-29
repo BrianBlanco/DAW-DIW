@@ -1,0 +1,23 @@
+* {
+    font-family: 'Open Sans';
+}
+
+h1, h2 {
+    font-weight: bolder;
+}
+
+li:nth-child(even):hover::after {
+    content: "Alabado sea el Espaguetti Volador";
+}
+
+li:nth-child(odd):hover::before {
+    content: "Satan !";
+}
+
+h2:nth-child(2) {
+    color: red;
+}
+
+h2:nth-child(5)::first-letter {
+    color: red;
+}
