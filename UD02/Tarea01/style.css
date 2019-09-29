@@ -1,0 +1,88 @@
+body {
+    background-image: url(https://i.pinimg.com/236x/58/53/24/5853244565934a13623301a62e4861a8--phone-backgrounds-iphone-wallpaper.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#header {
+    min-height: 10%;
+    display: flex;
+    background-color:#4B9DDA;
+}
+
+#logo {
+    width: 30%;
+    margin: 0%;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#navPrincipal {
+    padding-top: 10%;
+}
+
+#navPrincipal li {
+    margin-right: 5%;
+    list-style: none;
+    margin-bottom: 10%;
+    margin-left: 40%;
+}
+
+#content {
+    margin-top: 5%;
+}
+
+#divForm {
+    margin-left: 34%;
+    width: 20%;
+    padding: 3%;
+}
+
+#divForm form {
+    margin-left: 15%;
+}
+
+#divForm h1 {
+    margin-left: 30%;
+    margin-bottom: 10%;
+}
+
+#divForm form input {
+    display: inline-block;
+    margin-bottom: 5%;
+    margin-top: 1%;
+}
+
+#divForm label {
+    margin-left: 7%;
+}
+
+@media screen and (min-width: 900px) {
+    nav {
+        width: 50%;
+        margin: 0%;
+        margin-left: 70%;
+        margin-top: -3%;
+        float: left;
+    }
+
+    #navPrincipal {
+        padding: 0%;
+        width: 50%;
+    }
+
+    #navPrincipal li {
+        display: inline-block;
+        margin: 0%;
+        margin-left: 10%;
+    }
+}
