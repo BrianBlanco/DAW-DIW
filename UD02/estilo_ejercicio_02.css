@@ -59,12 +59,12 @@ li:nth-child(6) a {
     margin-left: 15%;
 }
 
-@for $i from 0 to 5 {
+/*@for $i from 0 to 5 {
     li:nth-child(#{$i}) a {
         border: 1px solid red;
     }
   }
-
+*/
 /*@for $i from 1 through 15 
     li:nth-child(#{$i})
         a {
