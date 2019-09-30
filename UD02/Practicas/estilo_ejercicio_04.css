@@ -1,0 +1,28 @@
+* {
+    margin-bottom: 1%;
+}
+:root {
+    --input-color-default: #ecd493;
+    --input-color-invalid: #bf9522;
+}
+
+input {
+    background-color: var(--input-color-default);
+}
+
+input:invalid {
+    background-color: var(--input-color-invalid);
+}
+
+input[type="submit"] {
+    border: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+
+    -webkit-box-shadow: 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+input[type="checkbox"] {
+    content: url("./cthulhu.svg");
+}
