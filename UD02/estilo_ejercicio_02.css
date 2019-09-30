@@ -51,29 +51,3 @@ li:nth-child(7) {
     background-image: url(./Icons/6.svg);
     background-repeat: no-repeat;
 }
-
-/*@for $i from 0 to 5 {
-    li:nth-child(#{$i}) a {
-        border: 1px solid red;
-    }
-<<<<<<< HEAD
-  }
-*/
-=======
-  }*/
-
->>>>>>> 8c9ecfc77d3ba1d3a4ef1ec02d6190e1684d8808
-/*@for $i from 1 through 15 
-    li:nth-child(#{$i})
-        a {
-            background-image: url(./Icons/1.svg);
-        }
-*/
-
-/*.navegacion (@i) when (@i > 0) {
-    li:nth-child(@{i}) a {
-      content: "@{i}";
-    }
-    .navegacion(@i - 1);
-  }
-  */
