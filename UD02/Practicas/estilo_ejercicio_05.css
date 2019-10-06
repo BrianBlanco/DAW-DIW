@@ -1,7 +1,10 @@
 :root {
     --main-bg-color: #D3D3D3;
 }
-
+.logo {
+    color: black;
+    font-weight: bold;
+}
 * {
     font-family:Amatic SC;
 }
