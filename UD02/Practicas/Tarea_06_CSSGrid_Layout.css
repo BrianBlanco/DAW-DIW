@@ -66,7 +66,15 @@ h6 {
 .item p {
     margin: 0 0 5px 0;
 }
+/* Alineamos el h1 */
+h1 {
+    display: grid;
+    justify-content: center;
+    margin-bottom: 25px;
+}
 
+/* Hacemos que el .container sea un grid layour de 4 columnas y de tamaño
+   de 1 fr por cada fila*/
 .container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -74,14 +82,30 @@ h6 {
     grid-row-gap: 16px;
 }
 
+/* Les ponemos un color gris al fondo de los intems pares, donde están los números */
 .item:nth-child(odd) {
     background-color: var(--grey);
 }
+
+/* Al segundo item, donde está "Cthulhu", hacemos que ocupe 3 columnas */
 .item2 {
     grid-column-end: span 3;
 }
 
+/* Agregamos una sombra al número y a su respectivo Dios primigenio
+   cuando hagamos un hover */
 .item:hover:nth-child(odd) + .item,
 .item:nth-child(odd):hover {
     box-shadow: 10px 10px 10px black;
+}
+
+/* Ponemos el sello de aprobación del pequeño monstruo adorable kawaii
+   fijo en la parte inferior derecha */
+#SealOfApproval {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    bottom: 0px;
+    right: 0px;
+    background-image: url(./cthulhu_approval.gif);
 }
