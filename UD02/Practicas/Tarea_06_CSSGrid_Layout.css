@@ -66,3 +66,22 @@ h6 {
 .item p {
     margin: 0 0 5px 0;
 }
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+}
+
+.item:nth-child(odd) {
+    background-color: var(--grey);
+}
+.item2 {
+    grid-column-end: span 3;
+}
+
+.item:hover:nth-child(odd) + .item,
+.item:nth-child(odd):hover {
+    box-shadow: 10px 10px 10px black;
+}
