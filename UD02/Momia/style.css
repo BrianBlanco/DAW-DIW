@@ -1,0 +1,10 @@
+#contenedorTotal {
+    display: grid;
+    grid-template-columns: repeat(22, 70px);
+    grid-template-rows: repeat(13, 55px);
+    margin: 20px;
+}
+.cuadricula {
+    border: 1px solid red;
+    
+}
