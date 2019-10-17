@@ -1,10 +1,44 @@
+body {
+    background-image: url("https://www.spriters-resource.com/resources/sheets/97/100272.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
 #contenedorTotal {
     display: grid;
-    grid-template-columns: repeat(22, 70px);
-    grid-template-rows: repeat(13, 55px);
-    margin: 20px;
+    grid-template-columns: repeat(23, auto);
+    grid-template-rows: repeat(16, 45px);
+    margin: 30px;
 }
-.cuadricula {
+
+div {
     border: 1px solid red;
-    
+}
+
+.salidaCerrada {
+
+}
+
+.salidaAbierta {
+background-image: url("https://cdn2.scratch.mit.edu/get_image/gallery/4607514_200x130.png");
+background-size: 100%;
+width: 37px;
+height: 43px;
+margin-left: 15px;
+background-repeat: no-repeat;
+}
+
+.primeraLinea {
+    border: 0px;
+}
+
+.bloque {
+    background-color: #D291BC;
+}
+
+.pasadizo {
+    background-color: white;
+}
+
+.cuadriculaExterior {
+    background-color: red;
 }

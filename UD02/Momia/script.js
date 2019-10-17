@@ -1,19 +1,35 @@
 window.onload = function() {
-    crearMapa(21, 13);
+    crearMapa(23, 16);
 };
 
 function crearMapa(ancho, alto) {
     var listaObjetos = ['llave', 'pergamino', 'momia', 'nada', 'urna'];
 
-    var mapa = new Map(listaObjetos);
 
-    for (let i = 1; i <= ancho; i++) {
-        for (let j = 0; j <= alto; j++) {
+    for (let i = 0; i < alto; i++) {
+        for (let j = 0; j < ancho; j++) {
             var divCuadricula = document.createElement("div");
-            
-            divCuadricula.classList.add("cuadricula");
 
+            if (i == 0 || i == 1 || i == (alto - 1) || j == 0 || j == (ancho - 1)) {
+                if (i == 1 && j == 5) {
+                    divCuadricula.classList.add("salidaCerrada");
+                } else{
+                    divCuadricula.classList.add("cuadriculaExterior");
+                }
+            } else if (i == 1 || i == (alto - 1)|| j == 1 || j == (ancho - 2)) {
+                divCuadricula.classList.add("pasadizo");
+
+            } else if ((i + 1) % 3 == 0 || (j - 1) % 4 == 0) {
+
+                divCuadricula.classList.add("pasadizo");
+            } else {
+                divCuadricula.classList.add("bloque");
+            }
+
+            divCuadricula.innerHTML = i + " - " + j;
             document.getElementById("contenedorTotal").appendChild(divCuadricula);
         }
+        
     }
 }
+
