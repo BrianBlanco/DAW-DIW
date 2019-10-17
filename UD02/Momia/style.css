@@ -6,13 +6,10 @@ body {
 #contenedorTotal {
     display: grid;
     grid-template-columns: repeat(23, auto);
-    grid-template-rows: repeat(16, 45px);
+    grid-template-rows: repeat(16, 43.96px);
     margin: 30px;
 }
 
-div {
-    border: 1px solid red;
-}
 .personaje {
     background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/3706906/LINEStorePC/main.png");
     background-size: 100%;
@@ -21,8 +18,9 @@ div {
 .huellas {
 
 }
-.salidaCerrada {
 
+.salidaCerrada {
+    background-color: black;
 }
 
 .salidaAbierta {

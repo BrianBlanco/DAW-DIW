@@ -15,9 +15,12 @@ function crearMapa(ancho, alto) {
             if (i == 0 || i == 1 || i == (alto - 1) || j == 0 || j == (ancho - 1)) {
                 if (i == 1 && j == 5) {
                     divCuadricula.classList.add("personaje");
-                } else{
+                } else if (i == 14 && j == 22) {
+                    divCuadricula.classList.add("salidaCerrada");
+                } else {
                     divCuadricula.classList.add("cuadriculaExterior");
                 }
+
             } else if (i == 1 || i == (alto - 1)|| j == 1 || j == (ancho - 2)) {
                 divCuadricula.classList.add("pasadizo");
 
@@ -28,40 +31,53 @@ function crearMapa(ancho, alto) {
                 divCuadricula.classList.add("bloque");
             }
 
-            divCuadricula.innerHTML = i + " - " + j;
+            //divCuadricula.innerHTML = i + " - " + j;
             document.getElementById("contenedorTotal").appendChild(divCuadricula);
             contador++;
         }
     }
 }
 
-function moverPersonaje(direccion) {
-    document.querySelector("[data-indice = '5']");
+function moverPersonaje(posicionNuevoDiv) {
+    let personaje = detectarPosicionPersonaje();
+    let posicionPersonaje = personaje.getAttribute("data-indice");
+    let suma = parseInt(posicionPersonaje) + parseInt(posicionNuevoDiv);
+    let divNuevo = document.querySelector("[data-indice = '" + suma + "']");
+    console.log(divNuevo.getAttribute("class"));
+    if(divNuevo.getAttribute("class") == "pasadizo") {
+        personaje.classList.remove("personaje");
+        divNuevo.classList.remove("pasillo");
+        divNuevo.classList.add("personaje");
+    }
+
+
 }
 
 document.addEventListener('keydown', function(event) {
 
     // Cogemos el valor de la tecla pulsada
     let teclaPulsada = event.key;
-    let direccion;
+    let posicionNuevoDiv = 0;
 
     switch (teclaPulsada) {
-        case "arrowDown":
-            direccion = "abajo";
+        case "ArrowDown":
+            posicionNuevoDiv = 23;
             break;
-        case "arrowUp":
-            direccion = "arriba";
+        case "ArrowUp":
+            posicionNuevoDiv = -23;
             break;
-        case "arrowLeft":
-            direccion = "izquierda";
+        case "ArrowLeft":
+            posicionNuevoDiv = -1;
             break;
-        case "arrowRight":
-            direccion = "derecha";
+        case "ArrowRight":
+            posicionNuevoDiv = 1;
             break;
     }
+
+    moverPersonaje(posicionNuevoDiv);
+
 /*
-    if (comprobarDivAdyacente(direccion)) {
-        moverPersonaje(direccion);
+    if (comprobarDivAdyacente(posicionNuevoDiv)) {
     } 
   */  
 });
