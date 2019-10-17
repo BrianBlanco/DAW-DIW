@@ -13,7 +13,14 @@ body {
 div {
     border: 1px solid red;
 }
+.personaje {
+    background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/3706906/LINEStorePC/main.png");
+    background-size: 100%;
+}
 
+.huellas {
+
+}
 .salidaCerrada {
 
 }
