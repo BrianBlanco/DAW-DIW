@@ -43,11 +43,16 @@ function moverPersonaje(posicionNuevoDiv) {
     let posicionPersonaje = personaje.getAttribute("data-indice");
     let suma = parseInt(posicionPersonaje) + parseInt(posicionNuevoDiv);
     let divNuevo = document.querySelector("[data-indice = '" + suma + "']");
-    console.log(divNuevo.getAttribute("class"));
-    if(divNuevo.getAttribute("class") == "pasadizo") {
-        personaje.classList.remove("personaje");
-        divNuevo.classList.remove("pasillo");
-        divNuevo.classList.add("personaje");
+    let divNuevoClass = divNuevo.getAttribute("class");
+
+    //console.log(divNuevoClass);
+    if(divNuevoClass == "pasadizo") {
+        personaje.classList.replace("personaje", "huellas");
+        divNuevo.classList.replace("pasadizo", "personaje");
+
+    } else if (divNuevoClass == "huellas") {
+        personaje.classList.replace("personaje", "huellas");
+        divNuevo.classList.replace("huellas", "personaje");
     }
 
 
@@ -75,11 +80,6 @@ document.addEventListener('keydown', function(event) {
     }
 
     moverPersonaje(posicionNuevoDiv);
-
-/*
-    if (comprobarDivAdyacente(posicionNuevoDiv)) {
-    } 
-  */  
 });
 
 function detectarPosicionPersonaje() {

@@ -1,3 +1,18 @@
+/*Rotación objetos*/
+* {
+    z-index: 0;
+    position: relative;
+}
+@keyframes anim1 {  
+    from { transform: scaleX(1) rotate(-15deg) ;-o-transform: scaleX(1) rotate(-15deg) ; }
+    to { transform: scaleX(-1) rotate(15deg);  -o-transform: scaleX(-1) rotate(15deg);}
+ }
+ @-webkit-keyframes anim1 {  
+    from { -webkit-transform: scaleX(1) rotate(-15deg) ; }
+    to { -webkit-transform: scaleX(-1) rotate(15deg);  }
+ }
+
+
 body {
     background-image: url("https://www.spriters-resource.com/resources/sheets/97/100272.png");
     background-size: 100%;
@@ -5,18 +20,45 @@ body {
 }
 #contenedorTotal {
     display: grid;
-    grid-template-columns: repeat(23, auto);
+    grid-template-columns: repeat(23, 42px);
     grid-template-rows: repeat(16, 43.96px);
     margin: 30px;
+}
+.objeto {
+    animation: anim1 2s ease-in-out alternate infinite;
+    -webkit-animation: anim1 2s ease-in-out alternate infinite;
 }
 
 .personaje {
     background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/3706906/LINEStorePC/main.png");
     background-size: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+ 
+
+    z-index: 3;
+}
+/* Esta mierda despliega el texto de puta madre loco
+
+background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/3706906/LINEStorePC/main.png");
+    width: 100%;
+    background-repeat: no-repeat;
+
+    -webkit-transition: width 1s, height 2s;
+    transition: width 1s, height 2s;
+*/
+
+.personaje:hover {
+    width: 300px;
+    -webkit-transition: 1s;
+    transition: 1s;
+    height: 300px;
+    z-index: 1;
 }
 
 .huellas {
-
+    background-image: url("https://i.ytimg.com/vi/su045ytF_z4/maxresdefault.jpg");
+    background-size: 100%;
 }
 
 .salidaCerrada {
