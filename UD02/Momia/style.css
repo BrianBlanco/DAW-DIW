@@ -82,6 +82,14 @@ background-repeat: no-repeat;
     background-color: #D291BC;
 }
 
+.bloqueRodeado {
+    background-color: red !important;
+}
+
+.bloqueAlDescubierto {
+    background-color: red !important;
+}
+
 .pasadizo {
     background-color: white;
 }
