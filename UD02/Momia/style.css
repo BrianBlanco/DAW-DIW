@@ -30,9 +30,9 @@ body {
 }
 
 .personaje {
-    background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/3706906/LINEStorePC/main.png");
+    background-image: url("./patoConFondo.png");
     background-size: 100%;
-    width: 100%;
+    height: 50px;
     background-repeat: no-repeat;
  
 
@@ -46,7 +46,6 @@ background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/
 
     -webkit-transition: width 1s, height 2s;
     transition: width 1s, height 2s;
-*/
 
 .personaje:hover {
     width: 300px;
@@ -54,10 +53,11 @@ background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/
     transition: 1s;
     height: 300px;
     z-index: 1;
-}
+}*/
 
 .huellas {
-    background-image: url("https://i.ytimg.com/vi/su045ytF_z4/maxresdefault.jpg");
+
+    background-image: url("./huellasConFondo.png");
     background-size: 100%;
 }
 
@@ -79,19 +79,22 @@ background-repeat: no-repeat;
 }
 
 .bloque {
-    background-color: #D291BC;
+    
 }
-
+.columna {
+    background-image: url("./columna.png");
+    background-size: 100%;
+}
 .bloqueRodeado {
-    background-color: red !important;
+    
 }
 
 .bloqueAlDescubierto {
-    background-color: red !important;
+
 }
 
 .pasadizo {
-    background-color: white;
+    background-image: url("./pasadizo.jpg");
 }
 
 .cuadriculaExterior {
@@ -99,6 +102,30 @@ background-repeat: no-repeat;
 }
 
 .momia {
-    background-image: url("https://dibujoskawaii.net/wp-content/uploads/2018/04/potato-kawaii-original.png");
+    background-image: url("./momia.gif");
     background-size: 100%;
+}
+
+.papiro {
+    background-image: url("./pegamino.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.llave {
+    background-image: url("./llave.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.sarcofago {
+    background-image: url("./sarcofago.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.nada {
+    background-image: url("./nada.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
 }

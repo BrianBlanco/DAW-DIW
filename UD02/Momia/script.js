@@ -1,6 +1,6 @@
 window.onload = function () {
     crearMapa(23, 16);
-    setInterval('movimientoMomia()', 500);
+    //setInterval('movimientoMomia()', 500);
 };
 
 function crearMapa(ancho, alto) {
@@ -26,14 +26,24 @@ function crearMapa(ancho, alto) {
 
             } else if (i == 1 || i == (alto - 1) || j == 1 || j == (ancho - 2)) {
                 divCuadricula.classList.add("pasadizo");
-
             } else if (i == 14 && j == 19) {
+                divCuadricula.classList.add("pasadizo");
                 divCuadricula.classList.add("momia");
             } else if ((i + 1) % 3 == 0 || (j - 1) % 4 == 0) {
-
                 divCuadricula.classList.add("pasadizo");
             } else {
-                divCuadricula.classList.add("bloque");
+
+                // Me arrepiento de toda esta línea
+                if (contador == 71 || contador == 72 || contador == 73 || contador == 94 || contador == 95 || contador == 96) {
+                    divCuadricula.classList.add("papiro");
+                } else if (contador == 225 || contador == 226 || contador == 227 || contador == 248 || contador == 249 || contador == 250) {
+                    divCuadricula.classList.add("sarcofago");
+                } else if (contador == 282 || contador == 283 || contador == 284 || contador == 305 || contador == 306 || contador == 307) {
+                    divCuadricula.classList.add("llave");
+                } else {
+                    divCuadricula.classList.add("bloque");
+                    divCuadricula.classList.add("columna");
+                }
             }
 
             //divCuadricula.innerHTML = i + " - " + j;
@@ -50,7 +60,6 @@ function moverPersonaje(posicionNuevoDiv) {
     let divNuevo = document.querySelector("[data-indice = '" + suma + "']");
     let divNuevoClass = divNuevo.getAttribute("class");
 
-    //console.log(divNuevoClass);
     if (divNuevoClass == "pasadizo") {
         personaje.classList.replace("personaje", "huellas");
         divNuevo.classList.replace("pasadizo", "personaje");
@@ -60,7 +69,7 @@ function moverPersonaje(posicionNuevoDiv) {
         divNuevo.classList.replace("huellas", "personaje");
     }
 
-    comprobarColumnaCubierta();
+    //comprobarColumnaCubierta();
 
 }
 
@@ -88,15 +97,22 @@ document.addEventListener('keydown', function (event) {
     moverPersonaje(posicionNuevoDiv);
 });
 
+// Función para comprobar si la columna ha sido completamente cubierta
 function comprobarColumnaCubierta() {
     let bloques = document.querySelectorAll(".bloque");
-    var arrayContadorBloquesRellenados = new Array();
-
+    let bloqueADescubrir;
     let dataIndice;
     for (let i = 0; i < bloques.length; i++) {
         dataIndice = parseInt(bloques[i].getAttribute("data-indice"));
         //console.log(dataIndice);
 
+
+        /*
+        
+         for (let i = 0; i < bloques.length; i++) {
+		bloques[i].classList.remove("bloqueRodeado");
+    }
+        */
         if (
             !contenedorTotal.childNodes[dataIndice - 23].classList.value.includes("pasadizo") &&
             !contenedorTotal.childNodes[dataIndice - 1].classList.value.includes("pasadizo") &&
@@ -104,7 +120,7 @@ function comprobarColumnaCubierta() {
             !contenedorTotal.childNodes[dataIndice + 23].classList.value.includes("pasadizo")
         ) {
 
-            bloques[i].classList.add(".bloqueRodeado");
+            bloques[i].classList.add("bloqueRodeado");
             //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
         }
 
@@ -118,19 +134,37 @@ function comprobarColumnaCubierta() {
                 bloques[i + 16].classList.value.includes("bloqueRodeado") &&
                 bloques[i + 17].classList.value.includes("bloqueRodeado")
             ) {
-                bloques[i].classList.add("bloqueAlDescubierto");
-                bloques[i + 1].classList.add("bloqueAlDescubierto");
-                bloques[i + 2].classList.add("bloqueAlDescubierto");
-                bloques[i + 15].classList.add("bloqueAlDescubierto");
-                bloques[i + 16].classList.add("bloqueAlDescubierto");
-                bloques[i + 17].classList.add("bloqueAlDescubierto");
+
+                if (i == 0) {
+                    bloqueADescubrir = "papiro";
+                } else if (i == 3) {
+                    bloqueADescubrir = "llave";
+                } else {
+                    bloqueADescubrir = "nada";
+                }
+
+                //add(bloqueADescubrir);
+                bloques[i].classList.add(bloqueADescubrir);
+                bloques[i + 1].classList.add(bloqueADescubrir);
+                bloques[i + 2].classList.add(bloqueADescubrir);
+                bloques[i + 15].classList.add(bloqueADescubrir);
+                bloques[i + 16].classList.add(bloqueADescubrir);
+                bloques[i + 17].classList.add(bloqueADescubrir);
+
+
+                bloques[i].classList.remove("bloqueRodeado");
+                bloques[i + 1].classList.remove("bloqueRodeado");
+                bloques[i + 2].classList.remove("bloqueRodeado");
+                bloques[i + 15].classList.remove("bloqueRodeado");
+                bloques[i + 16].classList.remove("bloqueRodeado");
+                bloques[i + 17].classList.remove("bloqueRodeado");
             }
         }
     }
 
 }
 
-
+// No tocar, por favor, huir de esta cosa
 function movimientoMomia() {
     let momia = document.querySelector(".momia");
     let dataIndiceMomia = parseInt(momia.getAttribute("data-indice"));
@@ -142,7 +176,7 @@ function movimientoMomia() {
     // X
     if (parseInt(dataIndicePersonaje % 23) == parseInt(dataIndiceMomia % 23)) {
         if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
-            
+
             divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
 
             if (!divNuevo.getAttribute("data-indice").includes("pasillo")) {
@@ -189,12 +223,12 @@ function movimientoMomia() {
             divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
             if (!divNuevo.classList.value.includes("pasadizo")) {
                 divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
-                console.log("syso");                
+                console.log("syso");
                 if (divNuevo.classList.value.includes("pasadizo")) {
-                    
+
                     detectarPosicionMomia().classList.replace("momia", "pasadizo");
                     divNuevo.classList.replace("pasadizo", "momia");
-                    
+
                 } else {
                     divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
                     detectarPosicionMomia().classList.replace("momia", "pasadizo");
@@ -237,7 +271,6 @@ function movimientoMomia() {
         divNuevo = document.querySelector("[data-indice = '" + direccionY + "']");
     }
 
-    console.log();
 }
 
 function detectarPosicionPersonaje() {
