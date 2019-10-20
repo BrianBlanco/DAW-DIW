@@ -140,15 +140,7 @@ function movimientoMomia() {
     let direccionY = 0;
 
     if (parseInt(dataIndicePersonaje % 23) == parseInt(dataIndiceMomia % 23)) {
-        divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 23) + "']");
-        if (divNuevo.classList.value.includes("pasadizo")) {
-            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
-            if (divNuevo.classList.value.includes("pasadizo")) {
-                console.log(divNuevo);
-                detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                divNuevo.classList.replace("pasadizo", "momia");    
-            }
-        }
+
     } else if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
         direccionX = dataIndiceMomia - 1;
     } else {
@@ -156,14 +148,29 @@ function movimientoMomia() {
     }
 
     if (parseInt(dataIndicePersonaje / 23) == parseInt(dataIndiceMomia / 23)) {
-        divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 23) + "']");
-        if (divNuevo.classList.value.includes("pasadizo")) {
-            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
+        if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
+                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
+                console.log("syso")
+                if (divNuevo.classList.value.includes("pasadizo")) {
+                    detectarPosicionMomia().classList.replace("momia", "pasadizo");
+                    divNuevo.classList.replace("pasadizo", "momia");
+                } else {
+                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
+                    detectarPosicionMomia().classList.replace("momia", "pasadizo");
+                    divNuevo.classList.replace("pasadizo", "momia");
+            }
+
+        } else {
+            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
             if (divNuevo.classList.value.includes("pasadizo")) {
                 detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                divNuevo.classList.replace("pasadizo", "momia");    
+                divNuevo.classList.replace("pasadizo", "momia");
             }
+
         }
+
+
+
     } else if (parseInt(dataIndicePersonaje / 23) < parseInt(dataIndiceMomia / 23)) {
         direccionY = dataIndiceMomia - 23;
     } else {
