@@ -139,7 +139,39 @@ function movimientoMomia() {
     let direccionX = 0;
     let direccionY = 0;
 
+    // X
     if (parseInt(dataIndicePersonaje % 23) == parseInt(dataIndiceMomia % 23)) {
+        if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
+            
+            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
+
+            if (!divNuevo.getAttribute("data-indice").includes("pasillo")) {
+                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
+
+                if (divNuevo.classList.value.includes("pasadizo")) {
+                    detectarPosicionMomia().classList.replace("momia", "pasadizo");
+                    divNuevo.classList.replace("pasadizo", "momia");
+                } else {
+                    divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
+                    detectarPosicionMomia().classList.replace("momia", "pasadizo");
+                    divNuevo.classList.replace("pasadizo", "momia");
+                }
+            } else {
+                direccionX = dataIndiceMomia - 1;
+            }
+        } else {
+            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1 - 23) + "']");
+            //console.log("syso");
+            if (divNuevo.classList.value.includes("pasadizo")) {
+                detectarPosicionMomia().classList.replace("momia", "pasadizo");
+                divNuevo.classList.replace("pasadizo", "momia");
+            } else {
+                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1 + 23) + "']");
+                detectarPosicionMomia().classList.replace("momia", "pasadizo");
+                divNuevo.classList.replace("pasadizo", "momia");
+            }
+        }
+
 
     } else if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
         direccionX = dataIndiceMomia - 1;
@@ -147,26 +179,40 @@ function movimientoMomia() {
         direccionX = dataIndiceMomia + 1;
     }
 
+
+
+
+
+    // Y
     if (parseInt(dataIndicePersonaje / 23) == parseInt(dataIndiceMomia / 23)) {
         if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
+            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
+            if (!divNuevo.classList.value.includes("pasadizo")) {
                 divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
-                console.log("syso")
+                console.log("syso");                
                 if (divNuevo.classList.value.includes("pasadizo")) {
+                    
                     detectarPosicionMomia().classList.replace("momia", "pasadizo");
                     divNuevo.classList.replace("pasadizo", "momia");
+                    
                 } else {
-                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
+                    divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
                     detectarPosicionMomia().classList.replace("momia", "pasadizo");
                     divNuevo.classList.replace("pasadizo", "momia");
+                }
+            } else {
+                direccionY = dataIndiceMomia - 1;
             }
-
         } else {
-            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
+            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1 - 23) + "']");
             if (divNuevo.classList.value.includes("pasadizo")) {
                 detectarPosicionMomia().classList.replace("momia", "pasadizo");
                 divNuevo.classList.replace("pasadizo", "momia");
+            } else {
+                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1 + 23) + "']");
+                detectarPosicionMomia().classList.replace("momia", "pasadizo");
+                divNuevo.classList.replace("pasadizo", "momia");
             }
-
         }
 
 
@@ -176,8 +222,6 @@ function movimientoMomia() {
     } else {
         direccionY = dataIndiceMomia + 23;
     }
-
-
 
     divNuevo = document.querySelector("[data-indice = '" + direccionX + "']");
 
