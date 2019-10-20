@@ -97,3 +97,8 @@ background-repeat: no-repeat;
 .cuadriculaExterior {
     background-color: red;
 }
+
+.momia {
+    background-image: url("https://dibujoskawaii.net/wp-content/uploads/2018/04/potato-kawaii-original.png");
+    background-size: 100%;
+}

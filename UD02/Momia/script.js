@@ -1,5 +1,6 @@
 window.onload = function () {
     crearMapa(23, 16);
+    setInterval('movimientoMomia()', 100);
 };
 
 function crearMapa(ancho, alto) {
@@ -26,6 +27,8 @@ function crearMapa(ancho, alto) {
             } else if (i == 1 || i == (alto - 1) || j == 1 || j == (ancho - 2)) {
                 divCuadricula.classList.add("pasadizo");
 
+            } else if (i == 14 && j == 19) {
+                divCuadricula.classList.add("momia");
             } else if ((i + 1) % 3 == 0 || (j - 1) % 4 == 0) {
 
                 divCuadricula.classList.add("pasadizo");
@@ -85,10 +88,6 @@ document.addEventListener('keydown', function (event) {
     moverPersonaje(posicionNuevoDiv);
 });
 
-function detectarPosicionPersonaje() {
-    return document.querySelector(".personaje");
-}
-
 function comprobarColumnaCubierta() {
     let bloques = document.querySelectorAll(".bloque");
     var arrayContadorBloquesRellenados = new Array();
@@ -131,4 +130,38 @@ function comprobarColumnaCubierta() {
 
 }
 
-    //console.log(document.querySelectorAll(".bloque").querySelector("data-indice"));
+
+function movimientoMomia() {
+    let momia = document.querySelector(".momia");
+    let dataIndiceMomia = momia.getAttribute("data-indice");
+    let dataIndicePersonaje = detectarPosicionPersonaje().getAttribute("data-indice");
+    let divNuevo = document.querySelector("[data-indice = '" + direccion + "']");
+    let direccion;
+
+    if ((dataIndicePersonaje / 23) < (dataIndiceMomia / 23)) {
+        direccion = dataIndiceMomia - 1;
+    } else {
+
+    }
+
+    if (divNuevo.classList.value.includes("pasadizo") || divNuevo.classList.value.includes("huellas")) {
+        divNuevo.classList.remove("pasadizo");
+        divNuevo.classList.add("momia");
+    }
+
+}
+
+function detectarPosicionPersonaje() {
+    return document.querySelector(".personaje");
+}
+
+function detectarPosicionMomia() {
+    return document.querySelector(".momia");
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
