@@ -97,6 +97,7 @@ function comprobarColumnaCubierta() {
     for (let i = 0; i < bloques.length; i++) {
         dataIndice = parseInt(bloques[i].getAttribute("data-indice"));
         //console.log(dataIndice);
+
         if (
             !contenedorTotal.childNodes[dataIndice - 23].classList.value.includes("pasadizo") &&
             !contenedorTotal.childNodes[dataIndice - 1].classList.value.includes("pasadizo") &&
@@ -108,9 +109,8 @@ function comprobarColumnaCubierta() {
             //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
         }
 
-        
-            //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
-
+        //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
+        if (dataIndice <= 294) {
             if (
                 bloques[i].classList.value.includes("bloqueRodeado") &&
                 bloques[i + 1].classList.value.includes("bloqueRodeado") &&
@@ -127,8 +127,8 @@ function comprobarColumnaCubierta() {
                 bloques[i + 17].classList.add("bloqueAlDescubierto");
             }
         }
+    }
 
-    
 }
 
     //console.log(document.querySelectorAll(".bloque").querySelector("data-indice"));
