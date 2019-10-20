@@ -1,6 +1,6 @@
 window.onload = function () {
     crearMapa(23, 16);
-    setInterval('movimientoMomia()', 1000);
+    setInterval('movimientoMomia()', 500);
 };
 
 function crearMapa(ancho, alto) {
@@ -140,7 +140,15 @@ function movimientoMomia() {
     let direccionY = 0;
 
     if (parseInt(dataIndicePersonaje % 23) == parseInt(dataIndiceMomia % 23)) {
-        
+        divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 23) + "']");
+        if (divNuevo.classList.value.includes("pasadizo")) {
+            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
+            if (divNuevo.classList.value.includes("pasadizo")) {
+                console.log(divNuevo);
+                detectarPosicionMomia().classList.replace("momia", "pasadizo");
+                divNuevo.classList.replace("pasadizo", "momia");    
+            }
+        }
     } else if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
         direccionX = dataIndiceMomia - 1;
     } else {
@@ -148,6 +156,14 @@ function movimientoMomia() {
     }
 
     if (parseInt(dataIndicePersonaje / 23) == parseInt(dataIndiceMomia / 23)) {
+        divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 23) + "']");
+        if (divNuevo.classList.value.includes("pasadizo")) {
+            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
+            if (divNuevo.classList.value.includes("pasadizo")) {
+                detectarPosicionMomia().classList.replace("momia", "pasadizo");
+                divNuevo.classList.replace("pasadizo", "momia");    
+            }
+        }
     } else if (parseInt(dataIndicePersonaje / 23) < parseInt(dataIndiceMomia / 23)) {
         direccionY = dataIndiceMomia - 23;
     } else {
