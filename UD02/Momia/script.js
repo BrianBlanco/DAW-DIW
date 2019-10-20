@@ -1,6 +1,6 @@
 window.onload = function () {
     crearMapa(23, 16);
-    setInterval('movimientoMomia()', 100);
+    setInterval('movimientoMomia()', 1000);
 };
 
 function crearMapa(ancho, alto) {
@@ -133,22 +133,44 @@ function comprobarColumnaCubierta() {
 
 function movimientoMomia() {
     let momia = document.querySelector(".momia");
-    let dataIndiceMomia = momia.getAttribute("data-indice");
+    let dataIndiceMomia = parseInt(momia.getAttribute("data-indice"));
     let dataIndicePersonaje = detectarPosicionPersonaje().getAttribute("data-indice");
-    let divNuevo = document.querySelector("[data-indice = '" + direccion + "']");
-    let direccion;
+    let divNuevo;
+    let direccionX = 0;
+    let direccionY = 0;
 
-    if ((dataIndicePersonaje / 23) < (dataIndiceMomia / 23)) {
-        direccion = dataIndiceMomia - 1;
+    if (parseInt(dataIndicePersonaje % 23) == parseInt(dataIndiceMomia % 23)) {
+        
+    } else if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
+        direccionX = dataIndiceMomia - 1;
     } else {
-
+        direccionX = dataIndiceMomia + 1;
     }
 
-    if (divNuevo.classList.value.includes("pasadizo") || divNuevo.classList.value.includes("huellas")) {
-        divNuevo.classList.remove("pasadizo");
-        divNuevo.classList.add("momia");
+    if (parseInt(dataIndicePersonaje / 23) == parseInt(dataIndiceMomia / 23)) {
+    } else if (parseInt(dataIndicePersonaje / 23) < parseInt(dataIndiceMomia / 23)) {
+        direccionY = dataIndiceMomia - 23;
+    } else {
+        direccionY = dataIndiceMomia + 23;
     }
 
+
+
+    divNuevo = document.querySelector("[data-indice = '" + direccionX + "']");
+
+    for (let i = 0; i < 2; i++) {
+        if (divNuevo.classList.value.includes("pasadizo")) {
+            detectarPosicionMomia().classList.replace("momia", "pasadizo");
+            divNuevo.classList.replace("pasadizo", "momia");
+        } else if (divNuevo.classList.value.includes("huellas")) {
+            detectarPosicionMomia().classList.replace("momia", "huellas");
+            divNuevo.classList.replace("huellas", "momia");
+        }
+
+        divNuevo = document.querySelector("[data-indice = '" + direccionY + "']");
+    }
+
+    console.log();
 }
 
 function detectarPosicionPersonaje() {
