@@ -1,6 +1,6 @@
 window.onload = function () {
     crearMapa(23, 16);
-    //setInterval('movimientoMomia()', 500);
+    setInterval('movimientoMomia()', 1000);
 };
 
 function crearMapa(ancho, alto) {
@@ -27,23 +27,22 @@ function crearMapa(ancho, alto) {
             } else if (i == 1 || i == (alto - 1) || j == 1 || j == (ancho - 2)) {
                 divCuadricula.classList.add("pasadizo");
             } else if (i == 14 && j == 19) {
-                divCuadricula.classList.add("pasadizo");
                 divCuadricula.classList.add("momia");
             } else if ((i + 1) % 3 == 0 || (j - 1) % 4 == 0) {
                 divCuadricula.classList.add("pasadizo");
             } else {
 
                 // Me arrepiento de toda esta línea
-                if (contador == 71 || contador == 72 || contador == 73 || contador == 94 || contador == 95 || contador == 96) {
+                /*if (contador == 71 || contador == 72 || contador == 73 || contador == 94 || contador == 95 || contador == 96) {
                     divCuadricula.classList.add("papiro");
                 } else if (contador == 225 || contador == 226 || contador == 227 || contador == 248 || contador == 249 || contador == 250) {
                     divCuadricula.classList.add("sarcofago");
                 } else if (contador == 282 || contador == 283 || contador == 284 || contador == 305 || contador == 306 || contador == 307) {
                     divCuadricula.classList.add("llave");
-                } else {
+                } else {*/
                     divCuadricula.classList.add("bloque");
                     divCuadricula.classList.add("columna");
-                }
+                //}
             }
 
             //divCuadricula.innerHTML = i + " - " + j;
@@ -69,7 +68,7 @@ function moverPersonaje(posicionNuevoDiv) {
         divNuevo.classList.replace("huellas", "personaje");
     }
 
-    //comprobarColumnaCubierta();
+    comprobarColumnaCubierta();
 
 }
 
