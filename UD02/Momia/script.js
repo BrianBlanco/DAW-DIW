@@ -115,6 +115,8 @@ function comprobarColumnaCubierta() {
     }
         */
        //console.log(listaObjetos.includes(bloques[i].classList.value));
+
+       // Me cago en mis muertos
        if(!listaObjetos.includes(bloques[i].classList.value)){
            console.log("No lo incluye");
         if (
