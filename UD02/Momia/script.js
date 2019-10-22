@@ -1,10 +1,12 @@
+var listaObjetos = ['llave', 'pergamino', 'nada', 'urna'];
 window.onload = function () {
+    
     crearMapa(23, 16);
-    setInterval('movimientoMomia()', 1000);
+    //setInterval('movimientoMomia()', 1000);
 };
 
 function crearMapa(ancho, alto) {
-    var listaObjetos = ['llave', 'pergamino', 'momia', 'nada', 'urna'];
+    
 
     var contador = 0;
 
@@ -112,6 +114,9 @@ function comprobarColumnaCubierta() {
 		bloques[i].classList.remove("bloqueRodeado");
     }
         */
+       //console.log(listaObjetos.includes(bloques[i].classList.value));
+       if(!listaObjetos.includes(bloques[i].classList.value)){
+           console.log("No lo incluye");
         if (
             !contenedorTotal.childNodes[dataIndice - 23].classList.value.includes("pasadizo") &&
             !contenedorTotal.childNodes[dataIndice - 1].classList.value.includes("pasadizo") &&
@@ -122,41 +127,45 @@ function comprobarColumnaCubierta() {
             bloques[i].classList.add("bloqueRodeado");
             //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
         }
-
+    }
         //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
         if (dataIndice <= 294) {
-            if (
-                bloques[i].classList.value.includes("bloqueRodeado") &&
-                bloques[i + 1].classList.value.includes("bloqueRodeado") &&
-                bloques[i + 2].classList.value.includes("bloqueRodeado") &&
-                bloques[i + 15].classList.value.includes("bloqueRodeado") &&
-                bloques[i + 16].classList.value.includes("bloqueRodeado") &&
-                bloques[i + 17].classList.value.includes("bloqueRodeado")
-            ) {
+            if(i % 3 == 0){
+                if (
+                    bloques[i].classList.value.includes("bloqueRodeado") &&
+                    bloques[i + 1].classList.value.includes("bloqueRodeado") &&
+                    bloques[i + 2].classList.value.includes("bloqueRodeado") &&
+                    bloques[i + 15].classList.value.includes("bloqueRodeado") &&
+                    bloques[i + 16].classList.value.includes("bloqueRodeado") &&
+                    bloques[i + 17].classList.value.includes("bloqueRodeado")
+                ) {
 
-                if (i == 0) {
-                    bloqueADescubrir = "papiro";
-                } else if (i == 3) {
-                    bloqueADescubrir = "llave";
-                } else {
-                    bloqueADescubrir = "nada";
+                    if (i == 0) {
+                        bloqueADescubrir = "papiro";
+                    } else if (i == 3) {
+                        bloqueADescubrir = "llave";
+                    } else if (i == 72) {
+                        bloqueADescubrir = "sarcofago";
+                    } else {
+                        bloqueADescubrir = "nada";
+                    }
+
+                    //add(bloqueADescubrir);
+                    bloques[i].classList.add(bloqueADescubrir);
+                    bloques[i + 1].classList.add(bloqueADescubrir);
+                    bloques[i + 2].classList.add(bloqueADescubrir);
+                    bloques[i + 15].classList.add(bloqueADescubrir);
+                    bloques[i + 16].classList.add(bloqueADescubrir);
+                    bloques[i + 17].classList.add(bloqueADescubrir);
+
+
+                    bloques[i].classList.remove("bloqueRodeado");
+                    bloques[i + 1].classList.remove("bloqueRodeado");
+                    bloques[i + 2].classList.remove("bloqueRodeado");
+                    bloques[i + 15].classList.remove("bloqueRodeado");
+                    bloques[i + 16].classList.remove("bloqueRodeado");
+                    bloques[i + 17].classList.remove("bloqueRodeado");
                 }
-
-                //add(bloqueADescubrir);
-                bloques[i].classList.add(bloqueADescubrir);
-                bloques[i + 1].classList.add(bloqueADescubrir);
-                bloques[i + 2].classList.add(bloqueADescubrir);
-                bloques[i + 15].classList.add(bloqueADescubrir);
-                bloques[i + 16].classList.add(bloqueADescubrir);
-                bloques[i + 17].classList.add(bloqueADescubrir);
-
-
-                bloques[i].classList.remove("bloqueRodeado");
-                bloques[i + 1].classList.remove("bloqueRodeado");
-                bloques[i + 2].classList.remove("bloqueRodeado");
-                bloques[i + 15].classList.remove("bloqueRodeado");
-                bloques[i + 16].classList.remove("bloqueRodeado");
-                bloques[i + 17].classList.remove("bloqueRodeado");
             }
         }
     }
@@ -272,14 +281,17 @@ function movimientoMomia() {
 
 }
 
+//Esto hace cosas
 function detectarPosicionPersonaje() {
     return document.querySelector(".personaje");
 }
 
+//Esto hace cosas
 function detectarPosicionMomia() {
     return document.querySelector(".momia");
 }
 
+//Esto hace s
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
