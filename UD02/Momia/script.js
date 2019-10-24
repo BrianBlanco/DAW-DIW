@@ -1,12 +1,12 @@
 var listaObjetos = ['llave', 'pergamino', 'nada', 'urna'];
 window.onload = function () {
-    
+
     crearMapa(23, 16);
     //setInterval('movimientoMomia()', 1000);
 };
 
 function crearMapa(ancho, alto) {
-    
+
 
     var contador = 0;
 
@@ -42,8 +42,8 @@ function crearMapa(ancho, alto) {
                 } else if (contador == 282 || contador == 283 || contador == 284 || contador == 305 || contador == 306 || contador == 307) {
                     divCuadricula.classList.add("llave");
                 } else {*/
-                    divCuadricula.classList.add("bloque");
-                    divCuadricula.classList.add("columna");
+                divCuadricula.classList.add("bloque");
+                divCuadricula.classList.add("columna");
                 //}
             }
 
@@ -114,79 +114,77 @@ function comprobarColumnaCubierta() {
 		bloques[i].classList.remove("bloqueRodeado");
     }
         */
-       //console.log(listaObjetos.includes(bloques[i].classList.value));
+        //console.log(listaObjetos.includes(bloques[i].classList.value));
 
-       // Me cago en mis muertos
-       console.log(!listaObjetos.includes(bloques[0].classList.values));
-       if (dataIndice <= 294) {
-       if(
-           !listaObjetos.includes(bloques[i].classList.values)      &&
-           !listaObjetos.includes(bloques[i + 1].classList.values)  &&
-           !listaObjetos.includes(bloques[i + 2].classList.values)  &&
-           !listaObjetos.includes(bloques[i + 15].classList.values) && 
-           !listaObjetos.includes(bloques[i + 16].classList.values) && 
-           !listaObjetos.includes(bloques[i + 17].classList.values)
-           ){
-
-
-           if (
-            !contenedorTotal.childNodes[dataIndice - 23].classList.value.includes("pasadizo") &&
-            !contenedorTotal.childNodes[dataIndice - 1].classList.value.includes("pasadizo") &&
-            !contenedorTotal.childNodes[dataIndice + 1].classList.value.includes("pasadizo") &&
-            !contenedorTotal.childNodes[dataIndice + 23].classList.value.includes("pasadizo")
-        ) {
-            
-            bloques[i].classList.add("bloqueRodeado");
-            //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
-        }
-    }
-        //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
-        
-            if(i % 3 == 0){
-                if (
-                    bloques[i].classList.contains("bloqueRodeado") &&
-                    bloques[i + 1].classList.contains("bloqueRodeado") &&
-                    bloques[i + 2].classList.contains("bloqueRodeado") &&
-                    bloques[i + 15].classList.contains("bloqueRodeado") &&
-                    bloques[i + 16].classList.contains("bloqueRodeado") &&
-                    bloques[i + 17].classList.contains("bloqueRodeado")
-                ) {
-
-                    if (i == 0) {
-                        bloqueADescubrir = "papiro";
-                    } else if (i == 3) {
-                        bloqueADescubrir = "llave";
-                    } else if (i == 72) {
-                        bloqueADescubrir = "sarcofago";
-                    } else {
-                        bloqueADescubrir = "nada";
+        // Me cago en mis muertos
+        if (dataIndice <= 294) {
+            //console.log("bloques: " + bloques[i].getAttribute("data-indice"));
+            if (
+                !listaObjetos.includes(bloques[i].classList.values) &&
+                !listaObjetos.includes(bloques[i + 1].classList.values) &&
+                !listaObjetos.includes(bloques[i + 2].classList.values) &&
+                !listaObjetos.includes(bloques[i + 15].classList.values) &&
+                !listaObjetos.includes(bloques[i + 16].classList.values) &&
+                !listaObjetos.includes(bloques[i + 17].classList.values)
+            ) {
+                    if (
+                        !contenedorTotal.childNodes[dataIndice - 23].classList.value.includes("pasadizo") &&
+                        !contenedorTotal.childNodes[dataIndice - 1].classList.value.includes("pasadizo") &&
+                        !contenedorTotal.childNodes[dataIndice + 1].classList.value.includes("pasadizo") &&
+                        !contenedorTotal.childNodes[dataIndice + 23].classList.value.includes("pasadizo")
+                    ) {
+                        bloques[i].classList.add("bloqueRodeado");
+                        //console.log("Bloque rodeado: " + bloques[i].getAttribute("data-indice"));
+                        //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
                     }
+            }
+            //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
+            if (parseInt(i / 15) % 2 == 0) {
+                if (i % 3 == 0) {
+                    console.log(bloques[i]);
+                    if (
+                        bloques[i].classList.contains("bloqueRodeado") &&
+                        bloques[i + 1].classList.contains("bloqueRodeado") &&
+                        bloques[i + 2].classList.contains("bloqueRodeado") &&
+                        bloques[i + 15].classList.contains("bloqueRodeado") &&
+                        bloques[i + 16].classList.contains("bloqueRodeado") &&
+                        bloques[i + 17].classList.contains("bloqueRodeado")
+                    ) {
+                        if (i == 0) {
+                            bloqueADescubrir = "papiro";
+                        } else if (i == 3) {
+                            bloqueADescubrir = "llave";
+                        } else if (i == 72) {
+                            bloqueADescubrir = "sarcofago";
+                        } else {
+                            bloqueADescubrir = "nada";
+                        }
 
-                    //add(bloqueADescubrir);
-                    // bloques[i].classList.add(bloqueADescubrir);
-                    // bloques[i + 1].classList.add(bloqueADescubrir);
-                    // bloques[i + 2].classList.add(bloqueADescubrir);
-                    // bloques[i + 15].classList.add(bloqueADescubrir);
-                    // bloques[i + 16].classList.add(bloqueADescubrir);
-                    // bloques[i + 17].classList.add(bloqueADescubrir);
+                        //add(bloqueADescubrir);
+                        // bloques[i].classList.add(bloqueADescubrir);
+                        // bloques[i + 1].classList.add(bloqueADescubrir);
+                        // bloques[i + 2].classList.add(bloqueADescubrir);
+                        // bloques[i + 15].classList.add(bloqueADescubrir);
+                        // bloques[i + 16].classList.add(bloqueADescubrir);
+                        // bloques[i + 17].classList.add(bloqueADescubrir);
 
 
 
-                    bloques[i].classList.replace("bloqueRodeado", bloqueADescubrir);
-                    console.log(" AAA " + i);
-                    bloques[i + 1].classList.replace("bloqueRodeado", bloqueADescubrir);
-                    bloques[i + 2].classList.replace("bloqueRodeado", bloqueADescubrir);
-                    bloques[i + 15].classList.replace("bloqueRodeado", bloqueADescubrir);
-                    bloques[i + 16].classList.replace("bloqueRodeado", bloqueADescubrir);
-                    bloques[i + 17].classList.replace("bloqueRodeado", bloqueADescubrir);
+                        bloques[i].classList.replace("bloqueRodeado", bloqueADescubrir);
+                        bloques[i + 1].classList.replace("bloqueRodeado", bloqueADescubrir);
+                        bloques[i + 2].classList.replace("bloqueRodeado", bloqueADescubrir);
+                        bloques[i + 15].classList.replace("bloqueRodeado", bloqueADescubrir);
+                        bloques[i + 16].classList.replace("bloqueRodeado", bloqueADescubrir);
+                        bloques[i + 17].classList.replace("bloqueRodeado", bloqueADescubrir);
 
 
-                //     bloques[i].classList.remove("bloqueRodeado");
-                //     bloques[i + 1].classList.remove("bloqueRodeado");
-                //     bloques[i + 2].classList.remove("bloqueRodeado");
-                //     bloques[i + 15].classList.remove("bloqueRodeado");
-                //     bloques[i + 16].classList.remove("bloqueRodeado");
-                //     bloques[i + 17].classList.remove("bloqueRodeado");
+                        //     bloques[i].classList.remove("bloqueRodeado");
+                        //     bloques[i + 1].classList.remove("bloqueRodeado");
+                        //     bloques[i + 2].classList.remove("bloqueRodeado");
+                        //     bloques[i + 15].classList.remove("bloqueRodeado");
+                        //     bloques[i + 16].classList.remove("bloqueRodeado");
+                        //     bloques[i + 17].classList.remove("bloqueRodeado");
+                    }
                 }
             }
         }
@@ -320,3 +318,15 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+
+/*
+let bloques = document.querySelectorAll(".bloque");
+
+
+!listaObjetos.includes(bloques[93].classList.values) &&
+                !listaObjetos.includes(bloques[93 + 1].classList.values) &&
+                !listaObjetos.includes(bloques[93 + 2].classList.values) &&
+                !listaObjetos.includes(bloques[93 + 15].classList.values)&&
+                !listaObjetos.includes(bloques[93 + 16].classList.values) &&
+                !listaObjetos.includes(bloques[93 + 17].classList.values)
+*/
