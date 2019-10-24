@@ -18,12 +18,14 @@ body {
     background-size: 100%;
     background-repeat: no-repeat;
 }
+
 #contenedorTotal {
     display: grid;
     grid-template-columns: repeat(23, 42px);
     grid-template-rows: repeat(16, 43.96px);
     margin: 30px;
 }
+
 .objeto {
     animation: anim1 2s ease-in-out alternate infinite;
     -webkit-animation: anim1 2s ease-in-out alternate infinite;
@@ -66,12 +68,12 @@ background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/
 }
 
 .salidaAbierta {
-background-image: url("https://cdn2.scratch.mit.edu/get_image/gallery/4607514_200x130.png");
-background-size: 100%;
-width: 37px;
-height: 43px;
-margin-left: 15px;
-background-repeat: no-repeat;
+    background-image: url("https://cdn2.scratch.mit.edu/get_image/gallery/4607514_200x130.png");
+    background-size: 100%;
+    width: 37px;
+    height: 43px;
+    margin-left: 15px;
+    background-repeat: no-repeat;
 }
 
 .primeraLinea {

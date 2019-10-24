@@ -103,8 +103,9 @@ function comprobarColumnaCubierta() {
     let bloques = document.querySelectorAll(".bloque");
     let bloqueADescubrir;
     let dataIndice;
-    for (let i = 0; i < bloques.length; i++) {
+    for (let i = 0; i < 119; i++) {
         dataIndice = parseInt(bloques[i].getAttribute("data-indice"));
+        console.log(i);
         //console.log(dataIndice);
 
 
@@ -117,15 +118,14 @@ function comprobarColumnaCubierta() {
         //console.log(listaObjetos.includes(bloques[i].classList.value));
 
         // Me cago en mis muertos
-        if (dataIndice <= 294) {
             //console.log("bloques: " + bloques[i].getAttribute("data-indice"));
             if (
-                !listaObjetos.includes(bloques[i].classList.values) &&
-                !listaObjetos.includes(bloques[i + 1].classList.values) &&
-                !listaObjetos.includes(bloques[i + 2].classList.values) &&
-                !listaObjetos.includes(bloques[i + 15].classList.values) &&
-                !listaObjetos.includes(bloques[i + 16].classList.values) &&
-                !listaObjetos.includes(bloques[i + 17].classList.values)
+                !listaObjetos.includes(bloques[i].classList.values)
+                // !listaObjetos.includes(bloques[i + 1].classList.values) &&
+                // !listaObjetos.includes(bloques[i + 2].classList.values) &&
+                // !listaObjetos.includes(bloques[i + 15].classList.values) &&
+                // !listaObjetos.includes(bloques[i + 16].classList.values) &&
+                // !listaObjetos.includes(bloques[i + 17].classList.values)
             ) {
                     if (
                         !contenedorTotal.childNodes[dataIndice - 23].classList.value.includes("pasadizo") &&
@@ -133,11 +133,14 @@ function comprobarColumnaCubierta() {
                         !contenedorTotal.childNodes[dataIndice + 1].classList.value.includes("pasadizo") &&
                         !contenedorTotal.childNodes[dataIndice + 23].classList.value.includes("pasadizo")
                     ) {
+                        console.log("Peta?");
                         bloques[i].classList.add("bloqueRodeado");
                         //console.log("Bloque rodeado: " + bloques[i].getAttribute("data-indice"));
                         //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
                     }
             }
+            console.log("Peta?2");
+
             //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
             if (parseInt(i / 15) % 2 == 0) {
                 if (i % 3 == 0) {
@@ -187,7 +190,7 @@ function comprobarColumnaCubierta() {
                     }
                 }
             }
-        }
+        
     }
 
 }
