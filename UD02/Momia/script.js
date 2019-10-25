@@ -2,7 +2,7 @@ var listaObjetos = ['llave', 'pergamino', 'nada', 'urna'];
 window.onload = function () {
 
     crearMapa(23, 16);
-    //setInterval('movimientoMomia()', 1000);
+    setInterval('movimientoMomia()', 400);
 };
 
 function crearMapa(ancho, alto) {
@@ -205,31 +205,27 @@ function movimientoMomia() {
     let direccionY = 0;
 
     // X
+
+    // Comprobamos que si el personaje está a la izquierda
     if (parseInt(dataIndicePersonaje % 23) == parseInt(dataIndiceMomia % 23)) {
+
+        // Comprobamos que si el personaje está arriba
         if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
 
-            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
+           momiaSiguePersonaje(dataIndicePersonaje, dataIndiceMomia, direccionX);
 
-            if (!divNuevo.getAttribute("data-indice").includes("pasillo")) {
-                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
-
-                if (divNuevo.classList.value.includes("pasadizo")) {
-                    detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                    divNuevo.classList.replace("pasadizo", "momia");
-                } else {
-                    divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
-                    detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                    divNuevo.classList.replace("pasadizo", "momia");
-                }
-            } else {
-                direccionX = dataIndiceMomia - 1;
-            }
+            // De no estar arriba de la momia
         } else {
+
+            // Cogemos la posición uno arriba uno a la izquierda
             divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1 - 23) + "']");
-            //console.log("syso");
+
+            // Si la posición que acabamos de buscar tiene pasadizo, va allí
             if (divNuevo.classList.value.includes("pasadizo")) {
                 detectarPosicionMomia().classList.replace("momia", "pasadizo");
                 divNuevo.classList.replace("pasadizo", "momia");
+
+                // Sino, va abajo a la izquierda
             } else {
                 divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1 + 23) + "']");
                 detectarPosicionMomia().classList.replace("momia", "pasadizo");
@@ -237,9 +233,11 @@ function movimientoMomia() {
             }
         }
 
-
+        // Si el personaje está a la derecha
     } else if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
         direccionX = dataIndiceMomia - 1;
+
+        // Si el personaje está en la misma posición horizontal
     } else {
         direccionX = dataIndiceMomia + 1;
     }
@@ -322,6 +320,33 @@ function shuffleArray(array) {
     }
 }
 
+function momiaSiguePersonaje(dataIndicePersonaje, dataIndiceMomia, direccionX, horizontal, vertical) {
+     // Cogemos una posición a la izquierda de la momia
+     divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
+
+     // Si no es pasillo
+     if (!divNuevo.getAttribute("data-indice").includes("pasillo")) {
+
+         // Conseguimos el valor de una posición arriba izquierda para esquivar el bloque
+         divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
+
+         // Comprobamos si arriba a la izquierda hay bloque
+         if (divNuevo.classList.value.includes("pasadizo")) {
+             detectarPosicionMomia().classList.replace("momia", "pasadizo");
+             divNuevo.classList.replace("pasadizo", "momia");
+
+             // De no haberlo, la momia iría abajo a la izquierda
+         } else {
+             divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
+             detectarPosicionMomia().classList.replace("momia", "pasadizo");
+             divNuevo.classList.replace("pasadizo", "momia");
+         }
+
+         // Si es pasillo, anda hacia el personaje
+     } else {
+         direccionX = dataIndiceMomia - 1;
+     }
+}
 /*
 let bloques = document.querySelectorAll(".bloque");
 
