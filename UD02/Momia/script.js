@@ -4,6 +4,8 @@ var listaObjetos = ['llave', 'papiro', 'urna', 'sarcofago', 'nada', 'nada',
 var vidas = 5;
 var listaObjetosConseguidos = new Array();
 var listaDivsConObjeto = new Array();
+var objetosConsegidos = new Array();
+var puerta = false;
 
 window.onload = function () {
     crearMapa(23, 16);
@@ -22,9 +24,8 @@ function crearMapa(ancho, alto) {
 
             if (i == 0 || i == 1 || i == (alto - 1) || j == 0 || j == (ancho - 1)) {
                 if (i == 1 && j == 5) {
+                    divCuadricula.classList.add("salida");
                     divCuadricula.classList.add("personaje");
-                } else if (i == 14 && j == 22) {
-                    divCuadricula.classList.add("salidaCerrada");
                 } else {
                     divCuadricula.classList.add("cuadriculaExterior");
                 }
@@ -86,6 +87,8 @@ function moverPersonaje(posicionNuevoDiv) {
         divNuevo.classList.replace("huellas", "personaje");
     } else if (divNuevoClass == "momia") {
         quitarVidaPersonaje();
+    } else if ((divNuevoClass == "salida") && (salida == true)) {
+        console.log("Has salido");
     }
 
     comprobarColumnaCubierta();
@@ -156,19 +159,10 @@ function comprobarColumnaCubierta() {
                     let posicionObjetoEnLista = parseInt(listaDivsConObjeto.indexOf(parseInt(bloques[i].getAttribute("data-indice"))));
                     if (posicionObjetoEnLista != -1) {
                         bloqueADescubrir = listaObjetos[posicionObjetoEnLista];
-                        console.log(bloqueADescubrir);
+                        if (bloqueADescubrir != "nada") {
+                            objetosConsegidos.push(bloqueADescubrir);
+                        }
                     }
-
-                    
-                    //add(bloqueADescubrir);
-                    // bloques[i].classList.add(bloqueADescubrir);
-                    // bloques[i + 1].classList.add(bloqueADescubrir);
-                    // bloques[i + 2].classList.add(bloqueADescubrir);
-                    // bloques[i + 15].classList.add(bloqueADescubrir);
-                    // bloques[i + 16].classList.add(bloqueADescubrir);
-                    // bloques[i + 17].classList.add(bloqueADescubrir);
-
-
 
                     bloques[i].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 1].classList.replace("bloqueRodeado", bloqueADescubrir);
@@ -177,15 +171,6 @@ function comprobarColumnaCubierta() {
                     bloques[i + 16].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 17].classList.replace("bloqueRodeado", bloqueADescubrir);
 
-
-
-
-                    //     bloques[i].classList.remove("bloqueRodeado");
-                    //     bloques[i + 1].classList.remove("bloqueRodeado");
-                    //     bloques[i + 2].classList.remove("bloqueRodeado");
-                    //     bloques[i + 15].classList.remove("bloqueRodeado");
-                    //     bloques[i + 16].classList.remove("bloqueRodeado");
-                    //     bloques[i + 17].classList.remove("bloqueRodeado");
                 }
             }
         }

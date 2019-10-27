@@ -63,10 +63,6 @@ background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/
     background-size: 100%;
 }
 
-.salidaCerrada {
-    background-color: black;
-}
-
 .salidaAbierta {
     background-image: url("https://cdn2.scratch.mit.edu/get_image/gallery/4607514_200x130.png");
     background-size: 100%;
@@ -80,22 +76,10 @@ background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/
     border: 0px;
 }
 
-.bloque {
-    
-}
 .columna {
     background-image: url("./columna.png");
     background-size: 100%;
 }
-
-.bloqueRodeado {
-    
-}
-
-.bloqueAlDescubierto {
-
-}
-
 .pasadizo {
     background-image: url("./pasadizo.jpg");
 }
