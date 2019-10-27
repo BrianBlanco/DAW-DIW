@@ -1,18 +1,19 @@
-var listaObjetos = ['llave', 'papiro', 'urna', 'sarcofago', 'nada', 'nada',
-    'nada', 'nada', 'nada', 'nada', 'nada', 'nada', 'nada',
+var listaObjetos = ['llave', 'papiro', 'sarcofago', 'nada', 'nada',
+    'nada', 'nada', 'nada', 'nada', 'nada', 'nada', 'nada', 'nada',
     'nada', 'nada', 'nada', 'nada', 'nada', 'nada', 'nada'];
 var vidas = 5;
-var listaObjetosConseguidos = new Array();
 var listaDivsConObjeto = new Array();
 var objetosConsegidos = new Array();
-var puerta = false;
+var salida = false;
+var intervalMomia;
 
 window.onload = function () {
     crearMapa(23, 16);
-    //setInterval('movimientoMomia()', 500);
 };
 
 function crearMapa(ancho, alto) {
+    intervalMomia = setInterval('movimientoMomia()', 500);
+
     var contador = 0;
 
     var contenedorTotal = document.getElementById("contenedorTotal");
@@ -33,19 +34,10 @@ function crearMapa(ancho, alto) {
             } else if (i == 1 || i == (alto - 1) || j == 1 || j == (ancho - 2)) {
                 divCuadricula.classList.add("pasadizo");
             } else if (i == 14 && j == 19) {
-                divCuadricula.classList.add("pasadizo");// MOMIA
+                divCuadricula.classList.add("momia");// MOMIA
             } else if ((i + 1) % 3 == 0 || (j - 1) % 4 == 0) {
                 divCuadricula.classList.add("pasadizo");
             } else {
-
-                // Me arrepiento de toda esta línea
-                /*if (contador == 71 || contador == 72 || contador == 73 || contador == 94 || contador == 95 || contador == 96) {
-                    divCuadricula.classList.add("papiro");
-                } else if (contador == 225 || contador == 226 || contador == 227 || contador == 248 || contador == 249 || contador == 250) {
-                    divCuadricula.classList.add("sarcofago");
-                } else if (contador == 282 || contador == 283 || contador == 284 || contador == 305 || contador == 306 || contador == 307) {
-                    divCuadricula.classList.add("llave");
-                } else {*/
                 divCuadricula.classList.add("bloque");
                 divCuadricula.classList.add("columna");
                 //}
@@ -87,12 +79,16 @@ function moverPersonaje(posicionNuevoDiv) {
         divNuevo.classList.replace("huellas", "personaje");
     } else if (divNuevoClass == "momia") {
         quitarVidaPersonaje();
-    } else if ((divNuevoClass == "salida") && (salida == true)) {
-        console.log("Has salido");
+    }
+
+    if ((divNuevoClass == "salida huellas") && (salida == true)) {
+        personaje.classList.replace("personaje", "huellas");
+        divNuevo.classList.replace("huellas", "personaje");
+        clearInterval(intervalMomia);
+        abrirPopUp();
     }
 
     comprobarColumnaCubierta();
-
 }
 
 document.addEventListener('keydown', function (event) {
@@ -152,10 +148,10 @@ function comprobarColumnaCubierta() {
                     bloques[i + 16].classList.contains("bloqueRodeado") &&
                     bloques[i + 17].classList.contains("bloqueRodeado")
                 ) {
-                   /* console.log(listaDivsConObjeto[0]);
-                    console.log(bloques[i].getAttribute("data-indice"));
-                    console.log(listaDivsConObjeto.length);
-                    */
+                    /* console.log(listaDivsConObjeto[0]);
+                     console.log(bloques[i].getAttribute("data-indice"));
+                     console.log(listaDivsConObjeto.length);
+                     */
                     let posicionObjetoEnLista = parseInt(listaDivsConObjeto.indexOf(parseInt(bloques[i].getAttribute("data-indice"))));
                     if (posicionObjetoEnLista != -1) {
                         bloqueADescubrir = listaObjetos[posicionObjetoEnLista];
@@ -164,13 +160,16 @@ function comprobarColumnaCubierta() {
                         }
                     }
 
+                    if (bloqueADescubrir == "llave") {
+                        salida = true;
+                    }
+
                     bloques[i].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 1].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 2].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 15].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 16].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 17].classList.replace("bloqueRodeado", bloqueADescubrir);
-
                 }
             }
         }
@@ -179,15 +178,19 @@ function comprobarColumnaCubierta() {
 
 // No tocar, por favor, huir de esta cosa
 function movimientoMomia() {
-    let momia = document.querySelector(".momia");
-    let dataIndiceMomia = parseInt(momia.getAttribute("data-indice"));
-    let dataIndicePersonaje = detectarPosicionPersonaje().getAttribute("data-indice");
-    let direccionX = 0;
-    let direccionY = 0;
+    let momia = document.querySelectorAll(".momia");
+    let dataIndiceMomia;
+    for (let i = 0; i < momia.length; i++) {
+        dataIndiceMomia = parseInt(momia[i].getAttribute("data-indice"));
 
-    moverMomia(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY);
+        let dataIndicePersonaje = detectarPosicionPersonaje().getAttribute("data-indice");
+        let direccionX = 0;
+        let direccionY = 0;
 
-
+        if (dataIndicePersonaje != 28) {
+            moverMomia(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY);
+        }
+    }
 }
 
 // Devuelve la posición del personaje
@@ -229,7 +232,6 @@ function moverMomia(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY
         }
 
     }
-
 
     if (divNuevo.classList.contains("pasadizo")) {
         detectarPosicionMomia().classList.replace("momia", "pasadizo");
@@ -408,6 +410,33 @@ function sleep(milliseconds) {
         }
     }
 }
+
+
+var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
+    overlay = document.getElementById('overlay'),
+    popup = document.getElementById('popup'),
+    btnCerrarPopup = document.getElementById('btn-cerrar-popup');
+
+function abrirPopUp() {
+    overlay.classList.add('active');
+    popup.classList.add('active');
+}
+
+function cerrarPopUp() {
+    //e.preventDefault();
+    overlay.classList.remove('active');
+    popup.classList.remove('active');
+
+    let myNode = document.getElementById("contenedorTotal");
+
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+
+    crearMapa(23, 16);
+
+}
+
 /*
 let bloques = document.querySelectorAll(".bloque");
 

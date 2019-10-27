@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="es-ES">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Oh Mummy</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="./script.js"></script>
+
     <style>
         @import url("./style.css");
     </style>
 
 </head>
+
 <body>
     <div id="contenedorTotal"></div>
+    <div id="btn-abrir-popup" class="btn-abrir-popup">Abrir Ventana Emergente</div>
+    <div class="overlay" id="overlay">
+        <div class="popup" id="popup">
+            <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+            <h3>Has ganado!</h3>
+            <button id="botonSubmit" class="btn-submit" value="Cerrar" onclick="cerrarPopUp()">Pasar Nivel</button>
+        </div>
+    </div>
+    <script src="./script.js"></script>
 </body>
+
 </html>
