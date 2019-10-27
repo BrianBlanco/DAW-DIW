@@ -1,9 +1,9 @@
-var listaObjetos = ['llave', 'pergamino', 'urna', 'nada', 'nada','nada',
-                    'nada', 'nada','nada', 'nada', 'nada', 'nada', 'nada',
-                    'nada', 'nada', 'nada', 'nada', 'nada', 'nada', 'nada'];
+var listaObjetos = ['llave', 'papiro', 'urna', 'sarcofago', 'nada', 'nada',
+    'nada', 'nada', 'nada', 'nada', 'nada', 'nada', 'nada',
+    'nada', 'nada', 'nada', 'nada', 'nada', 'nada', 'nada'];
 var vidas = 5;
-var listaObjetosConseguidos = new Array;
-var listaDivsConObjetos;
+var listaObjetosConseguidos = new Array();
+var listaDivsConObjeto = new Array();
 
 window.onload = function () {
     crearMapa(23, 16);
@@ -11,8 +11,6 @@ window.onload = function () {
 };
 
 function crearMapa(ancho, alto) {
-
-
     var contador = 0;
 
     var contenedorTotal = document.getElementById("contenedorTotal");
@@ -34,7 +32,7 @@ function crearMapa(ancho, alto) {
             } else if (i == 1 || i == (alto - 1) || j == 1 || j == (ancho - 2)) {
                 divCuadricula.classList.add("pasadizo");
             } else if (i == 14 && j == 19) {
-                divCuadricula.classList.add("momia");
+                divCuadricula.classList.add("pasadizo");// MOMIA
             } else if ((i + 1) % 3 == 0 || (j - 1) % 4 == 0) {
                 divCuadricula.classList.add("pasadizo");
             } else {
@@ -57,6 +55,19 @@ function crearMapa(ancho, alto) {
             contador++;
         }
     }
+
+    shuffleArray(listaObjetos);
+    let aux = 71;
+
+    for (let j = 1; j <= 20; j++) {
+        listaDivsConObjeto.push(aux);
+        if ((j % 5) == 0) {
+            aux += 53;
+        } else {
+            aux += 4;
+        }
+    }
+    //console.log(listaDivsConObjeto);
 }
 
 function moverPersonaje(posicionNuevoDiv) {
@@ -107,32 +118,14 @@ document.addEventListener('keydown', function (event) {
 
 // Función para comprobar si la columna ha sido completamente cubierta
 function comprobarColumnaCubierta() {
-    var bloques;
-    bloques = document.querySelectorAll(".bloque");
+    var bloques = document.querySelectorAll(".bloque");
     let bloqueADescubrir;
     let dataIndice;
     for (let i = 0; i < bloques.length; i++) {
         dataIndice = parseInt(bloques[i].getAttribute("data-indice"));
-        //console.log(dataIndice);
 
-
-        /*
-        
-         for (let i = 0; i < bloques.length; i++) {
-		bloques[i].classList.remove("bloqueRodeado");
-    }
-        */
-        //console.log(listaObjetos.includes(bloques[i].classList.value));
-
-        // Me cago en mis muertos
-        //console.log("bloques: " + bloques[i].getAttribute("data-indice"));
         if (
             !listaObjetos.includes(bloques[i].classList.values)
-            // !listaObjetos.includes(bloques[i + 1].classList.values) &&
-            // !listaObjetos.includes(bloques[i + 2].classList.values) &&
-            // !listaObjetos.includes(bloques[i + 15].classList.values) &&
-            // !listaObjetos.includes(bloques[i + 16].classList.values) &&
-            // !listaObjetos.includes(bloques[i + 17].classList.values)
         ) {
             if (
                 !contenedorTotal.childNodes[dataIndice - 23].classList.value.includes("pasadizo") &&
@@ -141,14 +134,13 @@ function comprobarColumnaCubierta() {
                 !contenedorTotal.childNodes[dataIndice + 23].classList.value.includes("pasadizo")
             ) {
                 bloques[i].classList.add("bloqueRodeado");
-                //console.log("Bloque rodeado: " + bloques[i].getAttribute("data-indice"));
-                //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
             }
         }
 
         //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
         if (parseInt(i / 15) % 2 == 0) {
             if (i % 3 == 0) {
+                //console.log(bloques[i].getAttribute("data-indice"));
                 if (
                     bloques[i].classList.contains("bloqueRodeado") &&
                     bloques[i + 1].classList.contains("bloqueRodeado") &&
@@ -157,20 +149,17 @@ function comprobarColumnaCubierta() {
                     bloques[i + 16].classList.contains("bloqueRodeado") &&
                     bloques[i + 17].classList.contains("bloqueRodeado")
                 ) {
-                    /*
-                    if (i == 0) {
-                        bloqueADescubrir = "papiro";
-                    } else if (i == 3) {
-                        bloqueADescubrir = "llave";
-                    } else if (i == 72) {
-                        bloqueADescubrir = "sarcofago";
-                    } else {
-                        bloqueADescubrir = "nada";
+                   /* console.log(listaDivsConObjeto[0]);
+                    console.log(bloques[i].getAttribute("data-indice"));
+                    console.log(listaDivsConObjeto.length);
+                    */
+                    let posicionObjetoEnLista = parseInt(listaDivsConObjeto.indexOf(parseInt(bloques[i].getAttribute("data-indice"))));
+                    if (posicionObjetoEnLista != -1) {
+                        bloqueADescubrir = listaObjetos[posicionObjetoEnLista];
+                        console.log(bloqueADescubrir);
                     }
-*/
-                    console.log(listaObjetos);
-                    bloqueADescubrir = listaObjetos.pop();
 
+                    
                     //add(bloqueADescubrir);
                     // bloques[i].classList.add(bloqueADescubrir);
                     // bloques[i + 1].classList.add(bloqueADescubrir);
@@ -187,11 +176,9 @@ function comprobarColumnaCubierta() {
                     bloques[i + 15].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 16].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 17].classList.replace("bloqueRodeado", bloqueADescubrir);
-                    
-                    console.log(typeof(bloques));
-                    delete bloques
-                    //console.log(bloques.indexOf(i));
-                   
+
+
+
 
                     //     bloques[i].classList.remove("bloqueRodeado");
                     //     bloques[i + 1].classList.remove("bloqueRodeado");
@@ -202,9 +189,7 @@ function comprobarColumnaCubierta() {
                 }
             }
         }
-
     }
-
 }
 
 // No tocar, por favor, huir de esta cosa
@@ -212,20 +197,10 @@ function movimientoMomia() {
     let momia = document.querySelector(".momia");
     let dataIndiceMomia = parseInt(momia.getAttribute("data-indice"));
     let dataIndicePersonaje = detectarPosicionPersonaje().getAttribute("data-indice");
-    let divNuevo;
     let direccionX = 0;
     let direccionY = 0;
 
-    // X
-
-    // Comprobamos que si el personaje está a la izquierda
-
-
     moverMomia(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY);
-
-
-
-    // Y
 
 
 }

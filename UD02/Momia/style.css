@@ -110,25 +110,25 @@ background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/
 }
 
 .papiro {
-    background-image: url("./pegamino.png");
+    background-image: url("./pegamino.png") !important;
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 .llave {
-    background-image: url("./llave.png");
+    background-image: url("./llave.png") !important;
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 .sarcofago {
-    background-image: url("./sarcofago.png");
+    background-image: url("./sarcofago.png") !important;
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 .nada {
-    background-image: url("./nada.png");
+    background-image: url("./nada.png") !important;
     background-size: 100%;
     background-repeat: no-repeat;
 }
