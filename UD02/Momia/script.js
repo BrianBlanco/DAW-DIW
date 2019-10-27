@@ -1,8 +1,13 @@
-var listaObjetos = ['llave', 'pergamino', 'nada', 'urna'];
-window.onload = function () {
+var listaObjetos = ['llave', 'pergamino', 'urna', 'nada', 'nada','nada',
+                    'nada', 'nada','nada', 'nada', 'nada', 'nada', 'nada',
+                    'nada', 'nada', 'nada', 'nada', 'nada', 'nada', 'nada'];
+var vidas = 5;
+var listaObjetosConseguidos = new Array;
+var listaDivsConObjetos;
 
+window.onload = function () {
     crearMapa(23, 16);
-    setInterval('movimientoMomia()', 400);
+    //setInterval('movimientoMomia()', 500);
 };
 
 function crearMapa(ancho, alto) {
@@ -68,6 +73,8 @@ function moverPersonaje(posicionNuevoDiv) {
     } else if (divNuevoClass == "huellas") {
         personaje.classList.replace("personaje", "huellas");
         divNuevo.classList.replace("huellas", "personaje");
+    } else if (divNuevoClass == "momia") {
+        quitarVidaPersonaje();
     }
 
     comprobarColumnaCubierta();
@@ -100,10 +107,11 @@ document.addEventListener('keydown', function (event) {
 
 // Función para comprobar si la columna ha sido completamente cubierta
 function comprobarColumnaCubierta() {
-    let bloques = document.querySelectorAll(".bloque");
+    var bloques;
+    bloques = document.querySelectorAll(".bloque");
     let bloqueADescubrir;
     let dataIndice;
-    for (let i = 0; i < 119; i++) {
+    for (let i = 0; i < bloques.length; i++) {
         dataIndice = parseInt(bloques[i].getAttribute("data-indice"));
         //console.log(dataIndice);
 
@@ -149,6 +157,7 @@ function comprobarColumnaCubierta() {
                     bloques[i + 16].classList.contains("bloqueRodeado") &&
                     bloques[i + 17].classList.contains("bloqueRodeado")
                 ) {
+                    /*
                     if (i == 0) {
                         bloqueADescubrir = "papiro";
                     } else if (i == 3) {
@@ -158,6 +167,9 @@ function comprobarColumnaCubierta() {
                     } else {
                         bloqueADescubrir = "nada";
                     }
+*/
+                    console.log(listaObjetos);
+                    bloqueADescubrir = listaObjetos.pop();
 
                     //add(bloqueADescubrir);
                     // bloques[i].classList.add(bloqueADescubrir);
@@ -175,7 +187,11 @@ function comprobarColumnaCubierta() {
                     bloques[i + 15].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 16].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 17].classList.replace("bloqueRodeado", bloqueADescubrir);
-
+                    
+                    console.log(typeof(bloques));
+                    delete bloques
+                    //console.log(bloques.indexOf(i));
+                   
 
                     //     bloques[i].classList.remove("bloqueRodeado");
                     //     bloques[i + 1].classList.remove("bloqueRodeado");
@@ -205,7 +221,7 @@ function movimientoMomia() {
     // Comprobamos que si el personaje está a la izquierda
 
 
-    momiaSiguePersonaje(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY);
+    moverMomia(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY);
 
 
 
@@ -214,17 +230,17 @@ function movimientoMomia() {
 
 }
 
-//Esto hace cosas
+// Devuelve la posición del personaje
 function detectarPosicionPersonaje() {
     return document.querySelector(".personaje");
 }
 
-//Esto hace cosas
+// Devuelve la posición de la momia
 function detectarPosicionMomia() {
     return document.querySelector(".momia");
 }
 
-//Esto hace s
+// Ordena aleatoriamente los elementos del array de objetos
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -232,17 +248,89 @@ function shuffleArray(array) {
     }
 }
 
+function moverMomia(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY) {
+
+    // Si el personaje está más a la izquierda
+    if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
+        divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
+
+        // Si el personaje está más a la derecha
+    } else if (parseInt(dataIndicePersonaje % 23) > parseInt(dataIndiceMomia % 23)) {
+        divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1) + "']");
+    } else {
+        if (parseInt(dataIndicePersonaje % 23) % 2 == 0) {
+            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 22) + "']");
+            if (divNuevo.classList.contains("bloque")) {
+                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 24) + "']");
+            }
+        } else {
+            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1) + "']");
+            // TODO corregir error momia posiciones impares
+        }
+
+    }
+
+
+    if (divNuevo.classList.contains("pasadizo")) {
+        detectarPosicionMomia().classList.replace("momia", "pasadizo");
+        divNuevo.classList.replace("pasadizo", "momia");
+
+    } else if (divNuevo.classList.contains("huellas")) {
+        detectarPosicionMomia().classList.replace("momia", "huellas");
+        divNuevo.classList.replace("huellas", "momia");
+    }
+
+    // Y
+    // Si el personaje está arriba de la momia
+    if (parseInt(dataIndicePersonaje / 23) < parseInt(dataIndiceMomia / 23)) {
+        divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 23) + "']");
+
+    } else if (parseInt(dataIndicePersonaje / 23) > parseInt(dataIndiceMomia / 23)) {
+        divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 23) + "']");
+
+    } else {
+        if (parseInt(dataIndicePersonaje / 23) % 3 == 0) {
+            if ((parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23))) {
+                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 24) + "']");
+            } else {
+                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 22) + "']");
+            }
+        } else {
+            if ((parseInt(dataIndicePersonaje % 23) > parseInt(dataIndiceMomia % 23))) {
+                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 24) + "']");
+            } else {
+                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 22) + "']");
+            }
+        }
+    }
+
+    if (divNuevo.classList.contains("pasadizo")) {
+        detectarPosicionMomia().classList.replace("momia", "pasadizo");
+        divNuevo.classList.replace("pasadizo", "momia");
+
+    } else if (divNuevo.classList.contains("huellas")) {
+        detectarPosicionMomia().classList.replace("momia", "huellas");
+        divNuevo.classList.replace("huellas", "momia");
+    }
+}
+/*
 function momiaSiguePersonaje(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY) {
+    console.log("Peronaje: " + parseInt(dataIndicePersonaje % 23));
+    console.log("Momia: " + parseInt(dataIndiceMomia % 23));
+
     if (parseInt(dataIndicePersonaje % 23) == parseInt(dataIndiceMomia % 23)) {
 
-        // Comprobamos que si el personaje está arriba
-        if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
+        // Cogemos una posición a la izquierda de la momia
+        divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
+        console.log(!divNuevo.getAttribute("data-indice").includes("pasadizo"));
+        if (divNuevo.getAttribute("data-indice").includes("pasadizo")) {
 
-            // Cogemos una posición a la izquierda de la momia
-            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
+
+            // Comprobamos que si el personaje está arriba
+        } else if (parseInt(dataIndicePersonaje / 23) < parseInt(dataIndiceMomia / 23)) {
 
             // Si no es pasillo
-            if (!divNuevo.getAttribute("data-indice").includes("pasillo")) {
+            if (!divNuevo.getAttribute("data-indice").includes("pasadizo") && !divNuevo.getAttribute("data-indice").includes("huellas")) {
 
                 // Conseguimos el valor de una posición arriba izquierda para esquivar el bloque
                 divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
@@ -253,6 +341,9 @@ function momiaSiguePersonaje(dataIndicePersonaje, dataIndiceMomia, direccionX, d
                     divNuevo.classList.replace("pasadizo", "momia");
 
                     // De no haberlo, la momia iría abajo a la izquierda
+                } else if (divNuevo.classList.value.includes("pasadizo")) {
+                    detectarPosicionMomia().classList.replace("momia", "huellas");
+                    divNuevo.classList.replace("huellas", "momia");
                 } else {
                     divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
                     detectarPosicionMomia().classList.replace("momia", "pasadizo");
@@ -276,8 +367,6 @@ function momiaSiguePersonaje(dataIndicePersonaje, dataIndiceMomia, direccionX, d
             } else if (divNuevo.classList.value.includes("huellas")) {
                 detectarPosicionMomia().classList.replace("momia", "huellas");
                 divNuevo.classList.replace("huellas", "momia");
-
-
                 // Sino, va abajo a la izquierda
             } else {
                 divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1 + 23) + "']");
@@ -345,10 +434,35 @@ function momiaSiguePersonaje(dataIndicePersonaje, dataIndiceMomia, direccionX, d
         divNuevo = document.querySelector("[data-indice = '" + direccionY + "']");
     }
 
+}*/
+
+function quitarVidaPersonaje() {
+    vida--;
+}
+// No mirar
+function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds) {
+            break;
+        }
+    }
 }
 /*
 let bloques = document.querySelectorAll(".bloque");
 
+// Variables para el console.log
+/*
+let personaje = document.querySelector(".personaje");
+
+let dataIndicePersonaje = personaje.getAttribute("data-indice");
+
+((dataIndicePersonaje % 23) - 2) % 4
+
+
+let momia = document.querySelector(".momia");
+
+let dataIndiceMomia = momia.getAttribute("data-indice");
 
 !listaObjetos.includes(bloques[93].classList.values) &&
                 !listaObjetos.includes(bloques[93 + 1].classList.values) &&
