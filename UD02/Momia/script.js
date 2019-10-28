@@ -1,18 +1,22 @@
 var listaObjetos = ['llave', 'papiro', 'sarcofago', 'nada', 'nada',
     'nada', 'nada', 'nada', 'nada', 'nada', 'nada', 'nada', 'nada',
     'nada', 'nada', 'nada', 'nada', 'nada', 'nada', 'nada'];
-var vidas = 5;
+var vidas = 4;
 var listaDivsConObjeto = new Array();
 var objetosConsegidos = new Array();
 var salida = false;
 var intervalMomia;
+var numeroDeMomias = 1;
+var score = 0;
+var divScore;
+var velocidadMomia = 500;
 
 window.onload = function () {
     crearMapa(23, 16);
 };
 
 function crearMapa(ancho, alto) {
-    intervalMomia = setInterval('movimientoMomia()', 500);
+    intervalMomia = setInterval('movimientoMomia()', velocidadMomia);
 
     var contador = 0;
 
@@ -27,6 +31,19 @@ function crearMapa(ancho, alto) {
                 if (i == 1 && j == 5) {
                     divCuadricula.classList.add("salida");
                     divCuadricula.classList.add("personaje");
+
+                } else if (i == 0 && j == 10) {
+                    divCuadricula.classList.add("llaveMarcador");
+                } else if (i == 0 && j == 11) {
+                    divCuadricula.classList.add("vida");
+                } else if (i == 0 && j == 12) {
+                    divCuadricula.classList.add("vida");
+                } else if (i == 0 && j == 13) {
+                    divCuadricula.classList.add("vida");
+                } else if (i == 0 && j == 14) {
+                    divCuadricula.classList.add("vida");
+                } else if (i == 0 && j == 16 || i == 0 && j == 17) {
+                    divCuadricula.classList.add("score");
                 } else {
                     divCuadricula.classList.add("cuadriculaExterior");
                 }
@@ -89,6 +106,8 @@ function moverPersonaje(posicionNuevoDiv) {
     }
 
     comprobarColumnaCubierta();
+    divScore = document.querySelector(".score");
+    divScore.textContent = score;
 }
 
 document.addEventListener('keydown', function (event) {
@@ -148,21 +167,26 @@ function comprobarColumnaCubierta() {
                     bloques[i + 16].classList.contains("bloqueRodeado") &&
                     bloques[i + 17].classList.contains("bloqueRodeado")
                 ) {
-                    /* console.log(listaDivsConObjeto[0]);
-                     console.log(bloques[i].getAttribute("data-indice"));
-                     console.log(listaDivsConObjeto.length);
-                     */
                     let posicionObjetoEnLista = parseInt(listaDivsConObjeto.indexOf(parseInt(bloques[i].getAttribute("data-indice"))));
                     if (posicionObjetoEnLista != -1) {
                         bloqueADescubrir = listaObjetos[posicionObjetoEnLista];
                         if (bloqueADescubrir != "nada") {
-                            objetosConsegidos.push(bloqueADescubrir);
+                            if (!objetosConsegidos.includes(bloqueADescubrir)) {
+                                objetosConsegidos.push(bloqueADescubrir);    
+                            }
+                            
                         }
                     }
 
                     if (bloqueADescubrir == "llave") {
                         salida = true;
-                    }
+                        let marca = document.querySelector(".llaveMarcador");
+                        marca.style.visibility = "visible";
+                    } else if (bloqueADescubrir == "papiro") {
+                        eliminarMomia();
+                    }/* else if (bloqueADescubrir = "sarcofago") {
+                       crearMomia(bloques[i].getAttribute("data-indice"));
+                    }*/
 
                     bloques[i].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 1].classList.replace("bloqueRodeado", bloqueADescubrir);
@@ -170,6 +194,7 @@ function comprobarColumnaCubierta() {
                     bloques[i + 15].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 16].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 17].classList.replace("bloqueRodeado", bloqueADescubrir);
+                    score = parseInt(objetosConsegidos.length * 100);
                 }
             }
         }
@@ -184,11 +209,9 @@ function movimientoMomia() {
         dataIndiceMomia = parseInt(momia[i].getAttribute("data-indice"));
 
         let dataIndicePersonaje = detectarPosicionPersonaje().getAttribute("data-indice");
-        let direccionX = 0;
-        let direccionY = 0;
 
         if (dataIndicePersonaje != 28) {
-            moverMomia(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY);
+            moverMomia(dataIndicePersonaje, dataIndiceMomia);
         }
     }
 }
@@ -211,7 +234,7 @@ function shuffleArray(array) {
     }
 }
 
-function moverMomia(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY) {
+function moverMomia(dataIndicePersonaje, dataIndiceMomia) {
 
     // Si el personaje está más a la izquierda
     if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
@@ -240,6 +263,8 @@ function moverMomia(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY
     } else if (divNuevo.classList.contains("huellas")) {
         detectarPosicionMomia().classList.replace("momia", "huellas");
         divNuevo.classList.replace("huellas", "momia");
+    } else if (divNuevo.classList.contains("personaje")) {
+        quitarVidaPersonaje();
     }
 
     // Y
@@ -273,135 +298,43 @@ function moverMomia(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY
     } else if (divNuevo.classList.contains("huellas")) {
         detectarPosicionMomia().classList.replace("momia", "huellas");
         divNuevo.classList.replace("huellas", "momia");
+    } else if (divNuevo.classList.contains("personaje")) {
+        quitarVidaPersonaje();
     }
 }
-/*
-function momiaSiguePersonaje(dataIndicePersonaje, dataIndiceMomia, direccionX, direccionY) {
-    console.log("Peronaje: " + parseInt(dataIndicePersonaje % 23));
-    console.log("Momia: " + parseInt(dataIndiceMomia % 23));
-
-    if (parseInt(dataIndicePersonaje % 23) == parseInt(dataIndiceMomia % 23)) {
-
-        // Cogemos una posición a la izquierda de la momia
-        divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
-        console.log(!divNuevo.getAttribute("data-indice").includes("pasadizo"));
-        if (divNuevo.getAttribute("data-indice").includes("pasadizo")) {
-
-
-            // Comprobamos que si el personaje está arriba
-        } else if (parseInt(dataIndicePersonaje / 23) < parseInt(dataIndiceMomia / 23)) {
-
-            // Si no es pasillo
-            if (!divNuevo.getAttribute("data-indice").includes("pasadizo") && !divNuevo.getAttribute("data-indice").includes("huellas")) {
-
-                // Conseguimos el valor de una posición arriba izquierda para esquivar el bloque
-                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
-
-                // Comprobamos si arriba a la izquierda hay bloque
-                if (divNuevo.classList.value.includes("pasadizo")) {
-                    detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                    divNuevo.classList.replace("pasadizo", "momia");
-
-                    // De no haberlo, la momia iría abajo a la izquierda
-                } else if (divNuevo.classList.value.includes("pasadizo")) {
-                    detectarPosicionMomia().classList.replace("momia", "huellas");
-                    divNuevo.classList.replace("huellas", "momia");
-                } else {
-                    divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
-                    detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                    divNuevo.classList.replace("pasadizo", "momia");
-                }
-
-                // Si es pasillo, anda hacia el personaje
-            } else {
-                direccionX = dataIndiceMomia - 1;
-            }
-            // De no estar arriba de la momia
-        } else {
-
-            // Cogemos la posición uno arriba uno a la izquierda
-            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1 - 23) + "']");
-
-            // Si la posición que acabamos de buscar tiene pasadizo, va allí
-            if (divNuevo.classList.value.includes("pasadizo")) {
-                detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                divNuevo.classList.replace("pasadizo", "momia");
-            } else if (divNuevo.classList.value.includes("huellas")) {
-                detectarPosicionMomia().classList.replace("momia", "huellas");
-                divNuevo.classList.replace("huellas", "momia");
-                // Sino, va abajo a la izquierda
-            } else {
-                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1 + 23) + "']");
-                detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                divNuevo.classList.replace("pasadizo", "momia");
-            }
-        }
-
-        // Si el personaje está a la derecha
-    } else if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
-        direccionX = dataIndiceMomia - 1;
-
-        // Si el personaje está en la misma posición horizontal
-    } else {
-        direccionX = dataIndiceMomia + 1;
-    }
-
-    // Y
-    if (parseInt(dataIndicePersonaje / 23) == parseInt(dataIndiceMomia / 23)) {
-        if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
-            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
-            if (!divNuevo.classList.value.includes("pasadizo")) {
-                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 - 23) + "']");
-                if (divNuevo.classList.value.includes("pasadizo")) {
-
-                    detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                    divNuevo.classList.replace("pasadizo", "momia");
-
-                } else {
-                    divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1 + 23) + "']");
-                    detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                    divNuevo.classList.replace("pasadizo", "momia");
-                }
-            } else {
-                direccionY = dataIndiceMomia - 1;
-            }
-        } else {
-            divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1 - 23) + "']");
-            if (divNuevo.classList.value.includes("pasadizo")) {
-                detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                divNuevo.classList.replace("pasadizo", "momia");
-            } else {
-                divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia + 1 + 23) + "']");
-                detectarPosicionMomia().classList.replace("momia", "pasadizo");
-                divNuevo.classList.replace("pasadizo", "momia");
-            }
-        }
-    } else if (parseInt(dataIndicePersonaje / 23) < parseInt(dataIndiceMomia / 23)) {
-        direccionY = dataIndiceMomia - 23;
-    } else {
-        direccionY = dataIndiceMomia + 23;
-    }
-
-    divNuevo = document.querySelector("[data-indice = '" + direccionX + "']");
-
-    for (let i = 0; i < 2; i++) {
-        if (divNuevo.classList.value.includes("pasadizo")) {
-            detectarPosicionMomia().classList.replace("momia", "pasadizo");
-            divNuevo.classList.replace("pasadizo", "momia");
-        } else if (divNuevo.classList.value.includes("huellas")) {
-            detectarPosicionMomia().classList.replace("momia", "huellas");
-            divNuevo.classList.replace("huellas", "momia");
-        }
-
-        divNuevo = document.querySelector("[data-indice = '" + direccionY + "']");
-    }
-
-}*/
 
 function quitarVidaPersonaje() {
-    vida--;
+    if (vidas != 0) {
+        cuadriculaVidas = document.querySelectorAll(".vida");
+        cuadriculaVidas[cuadriculaVidas.length - 1].classList.remove("vida");
+        vidas--;
+    }
+    if (vidas == 0) {
+        abrirPopUp("perder");
+    }
 }
-// No mirar
+
+function crearMomia(dataIndiceMomia) {
+    let posicionNuevaMomia = document.querySelector("[data-indice = '" + parseInt(parseInt(dataIndiceMomia) - 1) + "']");
+
+    if (posicionNuevaMomia.classList.contains("pasadizo")) {
+        posicionNuevaMomia.classList.replace("pasadizo", "momia");
+    } else if (posicionNuevaMomia.classList.contains("huellas")) {
+        posicionNuevaMomia.classList.replace("huellas", "momia");
+    }
+
+    numeroDeMomias++;
+}
+
+function eliminarMomia() {
+    if (detectarPosicionMomia() !== null) {
+        document.querySelector(".momia").classList.replace("momia", "pasadizo");
+        numeroDeMomias--;
+    }
+
+}
+
+// No mirar a partir de aquí
 function sleep(milliseconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
@@ -417,9 +350,24 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
     popup = document.getElementById('popup'),
     btnCerrarPopup = document.getElementById('btn-cerrar-popup');
 
-function abrirPopUp() {
+function abrirPopUp(resultado) {
+    console.log(velocidadMomia);
     overlay.classList.add('active');
     popup.classList.add('active');
+    if (resultado == "perder") {
+        console.log("perder");
+        velocidadMomia = 500;
+        document.getElementById("textoPopUp").textContent = "Has Perdido!";
+    } else {
+        if (velocidadMomia > 200) {
+            velocidadMomia -= 100;    
+        } else {
+            velocidadMomia = 150;
+        }
+        
+        document.getElementById("textoPopUp").textContent = "Has pasado de nivel! Pero cuidado, ahora será más difícil";
+    }
+
 }
 
 function cerrarPopUp() {
@@ -432,7 +380,9 @@ function cerrarPopUp() {
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
-
+    vidas = 4;
+    salida = false;
+    clearInterval(intervalMomia);
     crearMapa(23, 16);
 
 }

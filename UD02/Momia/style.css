@@ -101,7 +101,7 @@ background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/
 
 .llave {
     background-image: url("./llave.png") !important;
-    background-size: 100%;
+    background-size: 65%;
     background-repeat: no-repeat;
 }
 
@@ -117,11 +117,22 @@ background-image: url("https://stickershop.line-scdn.net/stickershop/v1/product/
     background-repeat: no-repeat;
 }
 
+.vida {
+    background-image: url("./vidas.png") !important;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
 
-
+.llaveMarcador {
+    background-image: url("./llave.png") !important;
+    background-size: 65%;
+    background-repeat: no-repeat;
+    visibility: hidden;
+}
 
 
 /*POP-UP*/
+
 #botonSubmit {
     background-color: blue;
     color: white;
