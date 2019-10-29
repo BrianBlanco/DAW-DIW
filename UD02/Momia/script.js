@@ -9,7 +9,7 @@ var intervalMomia;
 var numeroDeMomias = 1;
 var score = 0;
 var divScore;
-var velocidadMomia = 500;
+var velocidadMomia = 400;
 
 window.onload = function () {
     crearMapa(23, 16);
@@ -146,15 +146,14 @@ function comprobarColumnaCubierta() {
             !listaObjetos.includes(bloques[i].classList.values)
         ) {
             if (
-                !contenedorTotal.childNodes[dataIndice - 23].classList.value.includes("pasadizo") &&
-                !contenedorTotal.childNodes[dataIndice - 1].classList.value.includes("pasadizo") &&
-                !contenedorTotal.childNodes[dataIndice + 1].classList.value.includes("pasadizo") &&
-                !contenedorTotal.childNodes[dataIndice + 23].classList.value.includes("pasadizo")
+                !contenedorTotal.childNodes[dataIndice - 23].classList.contains("pasadizo") &&
+                !contenedorTotal.childNodes[dataIndice - 1].classList.contains("pasadizo") &&
+                !contenedorTotal.childNodes[dataIndice + 1].classList.contains("pasadizo") &&
+                !contenedorTotal.childNodes[dataIndice + 23].classList.contains("pasadizo")
             ) {
                 bloques[i].classList.add("bloqueRodeado");
             }
         }
-
         //console.log("bloque rellenado: " + bloques[i].getAttribute("data-indice"));
         if (parseInt(i / 15) % 2 == 0) {
             if (i % 3 == 0) {
@@ -184,9 +183,9 @@ function comprobarColumnaCubierta() {
                         marca.style.visibility = "visible";
                     } else if (bloqueADescubrir == "papiro") {
                         eliminarMomia();
-                    }/* else if (bloqueADescubrir = "sarcofago") {
-                       crearMomia(bloques[i].getAttribute("data-indice"));
-                    }*/
+                    } else if (bloqueADescubrir == "sarcofago") {
+                       //crearMomia(bloques[i].getAttribute("data-indice"));
+                    }
 
                     bloques[i].classList.replace("bloqueRodeado", bloqueADescubrir);
                     bloques[i + 1].classList.replace("bloqueRodeado", bloqueADescubrir);
@@ -239,6 +238,7 @@ function moverMomia(dataIndicePersonaje, dataIndiceMomia) {
     // Si el personaje está más a la izquierda
     if (parseInt(dataIndicePersonaje % 23) < parseInt(dataIndiceMomia % 23)) {
         divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 1) + "']");
+        console.log();
 
         // Si el personaje está más a la derecha
     } else if (parseInt(dataIndicePersonaje % 23) > parseInt(dataIndiceMomia % 23)) {
@@ -246,6 +246,7 @@ function moverMomia(dataIndicePersonaje, dataIndiceMomia) {
     } else {
         if (parseInt(dataIndicePersonaje % 23) % 2 == 0) {
             divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 22) + "']");
+
             if (divNuevo.classList.contains("bloque")) {
                 divNuevo = document.querySelector("[data-indice = '" + parseInt(dataIndiceMomia - 24) + "']");
             }
@@ -257,12 +258,12 @@ function moverMomia(dataIndicePersonaje, dataIndiceMomia) {
     }
 
     if (divNuevo.classList.contains("pasadizo")) {
-        detectarPosicionMomia().classList.replace("momia", "pasadizo");
-        divNuevo.classList.replace("pasadizo", "momia");
+        detectarPosicionMomia().classList.remove("momia");
+        divNuevo.classList.add("momia");
 
     } else if (divNuevo.classList.contains("huellas")) {
-        detectarPosicionMomia().classList.replace("momia", "huellas");
-        divNuevo.classList.replace("huellas", "momia");
+        detectarPosicionMomia().classList.remove("momia");
+        divNuevo.classList.add("momia");
     } else if (divNuevo.classList.contains("personaje")) {
         quitarVidaPersonaje();
     }
@@ -292,12 +293,13 @@ function moverMomia(dataIndicePersonaje, dataIndiceMomia) {
     }
 
     if (divNuevo.classList.contains("pasadizo")) {
-        detectarPosicionMomia().classList.replace("momia", "pasadizo");
-        divNuevo.classList.replace("pasadizo", "momia");
+        detectarPosicionMomia().classList.remove("momia");
+        divNuevo.classList.add("momia");
 
     } else if (divNuevo.classList.contains("huellas")) {
-        detectarPosicionMomia().classList.replace("momia", "huellas");
-        divNuevo.classList.replace("huellas", "momia");
+        //detectarPosicionMomia().classList.replace("momia", "huellas");
+        detectarPosicionMomia().classList.remove("momia");
+        divNuevo.classList.add("momia");
     } else if (divNuevo.classList.contains("personaje")) {
         quitarVidaPersonaje();
     }
@@ -356,6 +358,8 @@ function abrirPopUp(resultado) {
     popup.classList.add('active');
     if (resultado == "perder") {
         console.log("perder");
+        detectarPosicionPersonaje().classList.replace("personaje", "patoMuerto");
+        clearInterval(intervalMomia);
         velocidadMomia = 500;
         document.getElementById("textoPopUp").textContent = "Has Perdido!";
     } else {
