@@ -1,0 +1,17 @@
+body {
+    background-image: url("./media09/fondoThreshNoon.jpg");
+    background-size: 100%;
+}
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    align-content: center;
+    height: 700px;
+}
+
+.key {
+    padding: 80px;
+    border: 1px solid red;
+}
