@@ -1,62 +1,52 @@
- <DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-    <title>Yasuo Drum Kit</title>
-    <link rel="stylesheet" type="text/css" href="drumkit.css">
-</head>
-<body>
-<div class="keys">
-    <div data-key="81" class="key">
-        <kbd>Q</kbd>
-        <span class="sound">Tempest</span>
-    </div>
-    <div data-key="87" class="key">
-        <kbd>W</kbd>
-        <span class="sound">Muro</span>
-    </div>
-    <div data-key="69" class="key">
-        <kbd>E</kbd>
-        <span class="sound">Hoja</span>
-    </div>
-    <div data-key="82" class="key">
-        <kbd>R</kbd>
-        <span class="sound">Ulti!</span>
-    </div>
-    <!--
-    <div data-key="71" class="key">
-        <kbd>T</kbd>
-        <span class="sound">boom</span>
-    </div>
-    
-    <div data-key="72" class="key">
-        <kbd>Y</kbd>
-        <span class="sound">kick</span>
-    </div>
-    <div data-key="74" class="key">
-        <kbd>U</kbd>
-        <span class="sound">kick</span>
-    </div>
-    <div data-key="75" class="key">
-        <kbd>I</kbd>
-        <span class="sound">kick</span>
-    </div>
-    <div data-key="76" class="key">
-        <kbd>O</kbd>
-        <span class="sound">kick</span>
-    </div>
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Blitzcrank Drum Kit</title>
+        <link rel="stylesheet" type="text/css" href="drumkit.css"/>
+        <!--<embed src="./media09/audioInicio.mp3" autostart="true" loop="false" volume="80" width="0" height="0"></embed>
+        <audio id="audioInicio" src="./media09/audioInicio.mp3" loop="false" hidden muted="muted"></audio>
+        <script>
+            var audio = document.getElementById('audioInicio');
+            audio.play();
+        </script>
     -->
-</div>
+        <audio id="player" autoplay loop>
+            <source src="media09/audioInicio.mp3" type="audio/mp3">
+        </audio>
 
-<audio data-key="81" src="sounds/soundYasuoQ.mp3"></audio>
-<audio data-key="87" src="sounds/soundYasuoViento.mp3"></audio>
-<audio data-key="69" src="sounds/soundYasuoW.mp3"></audio>
-<audio data-key="82" src="sounds/soundYasuoR.mp3"></audio>
+    </head>
+
+    <body>
+        <div class="keys">
+            <div data-key="113" class="key">
+                <kbd>Q</kbd>
+                <span class="sound">Agarre Cohete</span>
+            </div>
+            <div data-key="119" class="key">
+                <kbd>W</kbd>
+                <span class="sound">Sobremarcha</span>
+            </div>
+            <div data-key="101" class="key">
+                <kbd>E</kbd>
+                <span class="sound">Puño de Poder</span>
+            </div>
+            <div data-key="114" class="key">
+                <kbd>R</kbd>
+                <span class="sound">Campo Estático</span>
+            </div>
+        </div>
+
+        <audio data-key="113" src="media09/Q.mp3"></audio>
+        <audio data-key="119" src="media09/W.mp3"></audio>
+        <audio data-key="101" src="media09/E.mp3"></audio>
+        <audio data-key="114" src="media09/R.mp3"></audio>
 
 
 
-<script src="drumkit.js">
+        <script src="drumkit.js">
 
-</script>
+        </script>
 
-</body>
-</html>
+    </body>
+
+    </html>

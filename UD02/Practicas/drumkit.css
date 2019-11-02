@@ -1,6 +1,7 @@
 body {
-    background-image: url("./media09/fondoThreshNoon.jpg");
-    background-size: 100%;
+    background-image: url("./media09/Blitz.png");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .keys {
@@ -9,9 +10,36 @@ body {
     justify-items: center;
     align-content: center;
     height: 700px;
+    padding-top: 100px;
 }
 
 .key {
-    padding: 80px;
-    border: 1px solid red;
+    display: grid;
+    padding: 30px 50px 50px 50px;
+    margin-left: 10%;
+    border: 8px solid black;
+    border-radius: 10px;
+    justify-items: center;
+    align-content: center;
+    transition: all 0.07s;
+    text-shadow:0 0 5px black;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+kbd {
+    display: block;
+    font-size: 8em;
+    color: white;
+    text-shadow: 5px 5px 10px black;
+    
+}
+
+.key span {
+    text-transform: uppercase;
+    font-size: 1.5em;
+    color: yellow;
+}
+.sombra {
+    transform: scale(1.1);
+    border-color: yellow;
 }
