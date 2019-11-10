@@ -46,38 +46,45 @@ box{
 
 }
 
-.ultimate{
-    background-color: #441155;
+.ultimate {
+    background-color: #6C3483;
     background-image: url(./cthulhu.svg);
     background-size: 100%;
     z-index: 0;
 }
 
-.ultimate:hover{
+.ultimateHover:hover{
     transform: scale(1.2);
 }
 
 /*Animaciones 13*/
 button {
-    height: 150px;
+    height: 120px;
+    float: left;
 }
 
 .jero1 {
+    width: 150px;
+    height: 150px;
     background-image: url(./jero1.png);
     background-size: 100%;
+    float: left;
 }
 
 .jero2 {
+    width: 150px;
+    height: 150px;
     background-image: url(./jero2.png);
     background-size: 100%;
+    margin-left: 350px;
 }
 
-.rotar {
-    animation: rotar 2s infinite linear;
+.girar {
+    animation: girar 2s infinite linear;
 }
 
 
-@keyframes rotar {
+@keyframes girar {
     0% {
         transform: rotate(0);
     }
@@ -88,10 +95,9 @@ button {
 
 .rebotar {
     position: relative;
-    margin: 0 auto;
-    animation-name: rebotar;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
+    
+    animation: rebotar 1s infinite linear;
+
 }
 
 @keyframes rebotar {
@@ -113,5 +119,6 @@ button {
     }
     to {
         top: 0px;
+        left: 0px;
     }
 }
