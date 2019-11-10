@@ -1,12 +1,13 @@
 function init() {
-
-    let botonCrearCaja = document.querySelector("button");
+    let botonCrearCaja = document.getElementsByTagName("button")[0];
     botonCrearCaja.addEventListener("click", crearCaja);
+    let header = document.querySelector("header");
+    console.log(header);
 }
 
 
 function crearCaja() {
-    let contenedor = document.querySelector("container");
+    let contenedor = document.getElementsByTagName("container")[0];
     if (contenedor.childElementCount < 20) {
         let cuadro = document.createElement("box");
         cuadro.addEventListener("click", evoluciona);

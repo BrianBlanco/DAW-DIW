@@ -1,0 +1,117 @@
+body{
+    background-color:grey;
+    padding: 3rem;
+}
+
+container {
+    margin: 1rem;
+    display: grid;
+
+    /*Anyadido*/
+    grid-template-columns: repeat(5, 120px);
+    grid-template-rows: repeat(5, 120px);
+}
+
+button{
+    border: 3px solid darkgrey;
+}
+
+
+box{
+    background-color: #1e0;
+    border: 3px solid #AABBAA;
+    border-radius: 10px;
+
+    /*Anyadido*/
+    width: 100px;
+    height: 100px;
+    transition: 0.2s linear;
+}
+
+.evoluciona{
+    background-color: #e10;
+
+    /*Anyadido*/
+    transform: translateX(120px);
+    z-index: 2;
+
+}
+
+.desevoluciona{
+    background-color: #10e;
+
+    /*Anyadido*/
+    transform: translateX(0px);
+    z-index: 1;
+
+}
+
+.ultimate{
+    background-color: #441155;
+    background-image: url(./cthulhu.svg);
+    background-size: 100%;
+    z-index: 0;
+}
+
+.ultimate:hover{
+    transform: scale(1.2);
+}
+
+/*Animaciones 13*/
+button {
+    height: 150px;
+}
+
+.jero1 {
+    background-image: url(./jero1.png);
+    background-size: 100%;
+}
+
+.jero2 {
+    background-image: url(./jero2.png);
+    background-size: 100%;
+}
+
+.rotar {
+    animation: rotar 2s infinite linear;
+}
+
+
+@keyframes rotar {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.rebotar {
+    position: relative;
+    margin: 0 auto;
+    animation-name: rebotar;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rebotar {
+    from {
+        top: 0px;
+        left: 0px;
+    }
+    25% {
+        top: 40px;
+        left: 40px;
+    }
+    50% {
+        top: 0px;
+        left: 60px;
+    }
+    75% {
+        top: 40px;
+        left: 40px;
+    }
+    to {
+        top: 0px;
+    }
+}
