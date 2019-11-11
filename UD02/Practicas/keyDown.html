@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <content>
+
+    </content>
+
+    <resultado>
+
+    </resultado>
+
+    <script>
+
+        function init() {
+            let contenedor = document.querySelector("content");
+
+            for (let i = 1; i <= 9; i++) {
+                let button = document.createElement("button");
+                button.value = i;
+                button.innerText = i;
+
+                button.addEventListener("click", escribir);
+
+                contenedor.appendChild(button);
+            }
+
+            window.addEventListener("keydown", usarTeclas);
+        }
+
+        function escribir() {
+            document.querySelector("resultado").innerText += this.value;
+        }
+
+        function usarTeclas(e) {
+            if (!isNaN(e.key)) {
+                document.querySelector("resultado").innerText += e.key;
+            }
+        }
+
+        window.onload = init;
+
+    </script>
+</body>
+
+</html>
