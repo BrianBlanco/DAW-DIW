@@ -26,6 +26,12 @@ body{
     color:#ffffff;
 }
 
+content {
+    display: none;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    justify-content: center;
+}
 
 /*
 * CSS for items

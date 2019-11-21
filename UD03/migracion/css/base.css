@@ -40,10 +40,8 @@ items{
 }
 
 item{
-    /* 
-     * Fragmentos perdidos 
-     * ^(;,;)^
-     */
+    display: grid;
+    justify-content: center;
 }
 
 /*
@@ -51,9 +49,26 @@ item{
 */
 
 button{
-    margin-left: 20vw;
     justify-self: center;
-    margin-bottom: 20px;
+    margin-top: 3vh;
+    font-family: 'OuroborosRegular';
+    width: 30vw;
+    height: 8vh;
+    font-size: 2em;
+    border: 3px solid black;
+    border-radius: 10px;
+    color: white;
+
+
+    background: rgba(203,96,179,1);
+    background: -moz-linear-gradient(top, rgba(203,96,179,1) 0%, rgba(193,70,161,1) 50%, rgba(168,0,119,1) 51%, rgba(219,54,164,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(203,96,179,1)), color-stop(50%, rgba(193,70,161,1)), color-stop(51%, rgba(168,0,119,1)), color-stop(100%, rgba(219,54,164,1)));
+    background: -webkit-linear-gradient(top, rgba(203,96,179,1) 0%, rgba(193,70,161,1) 50%, rgba(168,0,119,1) 51%, rgba(219,54,164,1) 100%);
+    background: -o-linear-gradient(top, rgba(203,96,179,1) 0%, rgba(193,70,161,1) 50%, rgba(168,0,119,1) 51%, rgba(219,54,164,1) 100%);
+    background: -ms-linear-gradient(top, rgba(203,96,179,1) 0%, rgba(193,70,161,1) 50%, rgba(168,0,119,1) 51%, rgba(219,54,164,1) 100%);
+    background: linear-gradient(to bottom, rgba(203,96,179,1) 0%, rgba(193,70,161,1) 50%, rgba(168,0,119,1) 51%, rgba(219,54,164,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb60b3', endColorstr='#db36a4', GradientType=0 );
+
 }
 
 button:hover {
@@ -82,10 +97,14 @@ button:active {
 */
 
 steps{
-   display: grid;
-   grid-template-columns: repeat(3, 1fr);
-   grid-template-rows: auto;
-   grid-row-gap: 20%;
+    margin-top: 6vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-row-gap: 20%;
+    column-gap: 5vw;
+    justify-content: center;
+    row-gap: 7vh;
 }
 
 /*
@@ -96,6 +115,10 @@ steps{
 */
 steps * {
 
+}
+
+steps *:nth-child(3n) {
+    justify-self: center;
 }
 
 .estabaEscondido{
@@ -112,11 +135,9 @@ steps * {
 * CSS for ProgressBars
 */
 progress{
-
-    /* 
-     * Fragmentos perdidos 
-     * ^(;,;)^
-     */
+    width: 100%;
+    height: 100%;
+    animation: neon 1s linear;
 }
 
 
@@ -130,10 +151,20 @@ finalmsg{
 }
 
 @keyframes neon {
- 
-    /* 
-     * Fragmentos perdidos 
-     * ^(;,;)^
-     */
+    from {
+        width: 0%;
+    }
+    25% {
+        width: 25%;
+    }
+    50% {
+        width: 50%;
+    }
+    75% {
+        width: 75%;
+    }
+    to {
+        width: 100%;
+    }
 }
 

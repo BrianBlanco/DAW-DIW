@@ -14,18 +14,25 @@ FUNCIONES PERDIDAS
 
 */
 
-function startMigration(){
-
-    // Fragmentos perdidos
-    // ^(;,;)^
+function startMigration() {
+    let childs = document.querySelector("steps").childNodes;
+    console.log(childs.length);
+    for (let i = 1; i < childs.length - 2; i++) {
+        childs[i].classList.add("estabaEscondido");
+        childs[i].addEventListener("transitionend", siguienteTransicion);
+    }
 }
 
-function init(){
+function siguienteTransicion() {
+
+}
+
+function init() {
     console.info(" * Init envirnoment ");
 
     // Set click function on button
-    document.querySelector("button").addEventListener("click",startMigration);
+    document.querySelector("button").addEventListener("click", startMigration);
 }
 
 // Init the environment when all is ready
-window.onload=init;
+window.onload = init;
