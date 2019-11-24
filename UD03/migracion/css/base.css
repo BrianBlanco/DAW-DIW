@@ -135,25 +135,40 @@ steps *:nth-child(3n) {
 */
 progress {
     height: 100%;
-
+    background-color: red;
 }
 
-.barraProgreso {
+.progress_transitioned {
     opacity: 100%;
     width: 100%;
-    animation: neon 1s linear;
+    animation: progressBar 1s linear;
+
 }
 
-
 finalmsg{
+    color: #E23A3A;
+    text-shadow: 0px 0px  rgba(168, 62, 168, 1);
+    transition: 1s;
+}
 
-    /* 
-     * Fragmentos perdidos 
-     * ^(;,;)^
-     */
+.finalmsg_transitioned {
+    animation: neon 4s ease-in-out infinite;
 }
 
 @keyframes neon {
+    0%,
+    50%,
+    100% {
+        opacity: 100%;
+    }
+
+    25%,
+    75% {
+        opacity: 10%;
+    }
+}
+
+@keyframes progressBar {
     from {
         width: 0%;
     }
