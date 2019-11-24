@@ -37,6 +37,7 @@ content {
 */
 
 items{
+
 }
 
 item{
@@ -96,7 +97,7 @@ button:active {
 *   GUI.
 */
 
-steps{
+steps {
     margin-top: 6vh;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -107,6 +108,7 @@ steps{
     row-gap: 7vh;
 }
 
+
 /*
 * CSS for all the steps
 * with class (estabaEscondido)
@@ -114,7 +116,8 @@ steps{
 * with a transition.
 */
 steps * {
-
+    opacity: 0%;
+    transition: 1s ease;
 }
 
 steps *:nth-child(3n) {
@@ -122,11 +125,7 @@ steps *:nth-child(3n) {
 }
 
 .estabaEscondido{
-   
-    /* 
-     * Fragmentos perdidos 
-     * ^(;,;)^
-     */
+    opacity: 100%;
 }
 
 
@@ -134,12 +133,16 @@ steps *:nth-child(3n) {
 /*
 * CSS for ProgressBars
 */
-progress{
-    width: 100%;
+progress {
     height: 100%;
-    animation: neon 1s linear;
+
 }
 
+.barraProgreso {
+    opacity: 100%;
+    width: 100%;
+    animation: neon 1s linear;
+}
 
 
 finalmsg{

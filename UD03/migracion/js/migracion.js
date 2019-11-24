@@ -14,16 +14,28 @@ FUNCIONES PERDIDAS
 
 */
 
+var contador = 0;
+var hijosSteps;
+
 function startMigration() {
-    let childs = document.querySelector("steps").childNodes;
-    console.log(childs.length);
-    for (let i = 1; i < childs.length - 2; i++) {
-        childs[i].classList.add("estabaEscondido");
-        childs[i].addEventListener("transitionend", siguienteTransicion);
+    let pasoATransicionar = hijosSteps[contador];
+    pasoATransicionar.classList.add("estabaEscondido");
+
+    if (pasoATransicionar.tagName == "PROGRESS") {
+        pasoATransicionar.classList.add("barraProgreso");
     }
+
+    pasoATransicionar.addEventListener("transitionend", function () {
+        contador++;
+        if (contador < 18) {
+            startMigration();
+        }
+    });
+
 }
 
 function siguienteTransicion() {
+
 
 }
 
@@ -32,6 +44,7 @@ function init() {
 
     // Set click function on button
     document.querySelector("button").addEventListener("click", startMigration);
+    hijosSteps = document.querySelector("steps").children;
 }
 
 // Init the environment when all is ready
