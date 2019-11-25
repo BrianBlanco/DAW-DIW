@@ -3,44 +3,42 @@ CSS Base for the Miskatonic Herald
 */
 
 @font-face {
-  font-family: neon;
-  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+    font-family: neon;
+    src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
 }
 
 /*
 * CSS for body
 */
 
-body{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    height:100vh;
-    
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
     /*background-color:#323232;*/
-    background-image:url("https://picsum.photos/1600/900");
+    background-image: url("https://picsum.photos/1600/900");
     font-family: 'OuroborosRegular';
     font-weight: normal;
     font-style: normal;
     margin: 0;
-    color:#ffffff;
+    color: #ffffff;
 }
 
 content {
     background-color: rgb(130, 130, 130, 0.8);
     border-radius: 10px;
-    height:90vh;
+    height: 90vh;
 }
 
 /*
 * CSS for items
 */
 
-items{
+items {}
 
-}
-
-item{
+item {
     display: grid;
     justify-content: center;
 }
@@ -49,7 +47,7 @@ item{
 * CSS for body
 */
 
-button{
+button {
     justify-self: center;
     margin-top: 3vh;
     font-family: 'OuroborosRegular';
@@ -61,19 +59,23 @@ button{
     color: white;
 
 
-    background: rgba(203,96,179,1);
-    background: -moz-linear-gradient(top, rgba(203,96,179,1) 0%, rgba(193,70,161,1) 50%, rgba(168,0,119,1) 51%, rgba(219,54,164,1) 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(203,96,179,1)), color-stop(50%, rgba(193,70,161,1)), color-stop(51%, rgba(168,0,119,1)), color-stop(100%, rgba(219,54,164,1)));
-    background: -webkit-linear-gradient(top, rgba(203,96,179,1) 0%, rgba(193,70,161,1) 50%, rgba(168,0,119,1) 51%, rgba(219,54,164,1) 100%);
-    background: -o-linear-gradient(top, rgba(203,96,179,1) 0%, rgba(193,70,161,1) 50%, rgba(168,0,119,1) 51%, rgba(219,54,164,1) 100%);
-    background: -ms-linear-gradient(top, rgba(203,96,179,1) 0%, rgba(193,70,161,1) 50%, rgba(168,0,119,1) 51%, rgba(219,54,164,1) 100%);
-    background: linear-gradient(to bottom, rgba(203,96,179,1) 0%, rgba(193,70,161,1) 50%, rgba(168,0,119,1) 51%, rgba(219,54,164,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb60b3', endColorstr='#db36a4', GradientType=0 );
+    background: rgba(203, 96, 179, 1);
+    background: -moz-linear-gradient(top, rgba(203, 96, 179, 1) 0%, rgba(193, 70, 161, 1) 50%, rgba(168, 0, 119, 1) 51%, rgba(219, 54, 164, 1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(203, 96, 179, 1)), color-stop(50%, rgba(193, 70, 161, 1)), color-stop(51%, rgba(168, 0, 119, 1)), color-stop(100%, rgba(219, 54, 164, 1)));
+    background: -webkit-linear-gradient(top, rgba(203, 96, 179, 1) 0%, rgba(193, 70, 161, 1) 50%, rgba(168, 0, 119, 1) 51%, rgba(219, 54, 164, 1) 100%);
+    background: -o-linear-gradient(top, rgba(203, 96, 179, 1) 0%, rgba(193, 70, 161, 1) 50%, rgba(168, 0, 119, 1) 51%, rgba(219, 54, 164, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(203, 96, 179, 1) 0%, rgba(193, 70, 161, 1) 50%, rgba(168, 0, 119, 1) 51%, rgba(219, 54, 164, 1) 100%);
+    background: linear-gradient(to bottom, rgba(203, 96, 179, 1) 0%, rgba(193, 70, 161, 1) 50%, rgba(168, 0, 119, 1) 51%, rgba(219, 54, 164, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cb60b3', endColorstr='#db36a4', GradientType=0);
 
 }
 
+h1 {
+    -webkit-text-stroke: 0.2px purple;
+
+}
 button:hover {
-    
+
     /* 
      * Fragmentos perdidos 
      * ^(;,;)^
@@ -81,7 +83,7 @@ button:hover {
 }
 
 button:active {
-    
+
     /* 
      * Fragmentos perdidos 
      * ^(;,;)^
@@ -115,16 +117,20 @@ steps {
 * that turns the element visible
 * with a transition.
 */
+
 steps * {
     opacity: 0%;
     transition: 1s ease;
+    margin-left: 20px;
+    
 }
 
 steps *:nth-child(3n) {
     justify-self: center;
 }
 
-.estabaEscondido{
+
+.estabaEscondido {
     opacity: 100%;
 }
 
@@ -135,19 +141,29 @@ steps *:nth-child(3n) {
 */
 progress {
     height: 100%;
-    background-color: red;
+    -moz-appearance: none;
+}
+
+progress[value] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.progress_transitioned::-webkit-progress-bar {
+    border-radius: 5px;
+    background-color: blue;
 }
 
 .progress_transitioned {
-    opacity: 100%;
     width: 100%;
     animation: progressBar 1s linear;
-
 }
 
-finalmsg{
+finalmsg {
     color: #E23A3A;
-    text-shadow: 0px 0px  rgba(168, 62, 168, 1);
+    -webkit-text-stroke: 0.5px yellow;
+    text-shadow: 0px 0px rgba(168, 62, 168, 1);
     transition: 1s;
 }
 
@@ -156,6 +172,7 @@ finalmsg{
 }
 
 @keyframes neon {
+
     0%,
     50%,
     100% {
@@ -172,17 +189,20 @@ finalmsg{
     from {
         width: 0%;
     }
+
     25% {
         width: 25%;
     }
+
     50% {
         width: 50%;
     }
+
     75% {
         width: 75%;
     }
+
     to {
         width: 100%;
     }
 }
-

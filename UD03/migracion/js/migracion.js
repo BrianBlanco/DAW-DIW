@@ -29,7 +29,6 @@ function startMigration() {
 
     document.querySelector("button").removeEventListener("click", startMigration);
 
-
     // Cogemos el hijo que queramos modificar y lo instanciamos
     let pasoATransicionar = hijosSteps[contador];
 
@@ -45,8 +44,8 @@ function startMigration() {
         pasoATransicionar.addEventListener("transitionend", function () {
             pasoATransicionar.classList.add("finalmsg_transitioned");
         });
-
     }
+
     // Agregamos un evento que al terminar su transicion, vuelva a llamar a esta funcion hasta un maximo
     // de 18 veces, para que no hayan errores, recordamos que se empieza desde el 0
     pasoATransicionar.addEventListener("transitionend", function () {
