@@ -7,7 +7,7 @@
 
 // Algunos valores
 
-const fuentesUrl = "http://mapas.valencia.es/lanzadera/opendata/cia_lavapies/JSON ";
+const fallasUrl = "http://mapas.valencia.es/lanzadera/opendata/cia_lavapies/JSON ";
 
 // Esta es la funcion de filtrado para
 // obtener tan solo los elementos que cumplen
@@ -30,7 +30,7 @@ function toUpp(){
 function buscar(){
 
     // Obtenemos el JSON que esta definido
-    const fetchPromesa = fetch(fuentesUrl);
+    const fetchPromesa = fetch(fallasUrl);
 
     // Cuando se resuelva la promesa
     fetchPromesa.then(response => {
@@ -48,10 +48,10 @@ function buscar(){
 	let listado=document.createElement("ul");
 	console.log(resultado);
 	// Por cada uno de ellos 
-	resultado.forEach(fuente=>{
+	resultado.forEach(falla=>{
 	    // Creamos un <li>
-	    let calleli=document.createElement("li");
-		calleli.innerHTML=fuente.properties.calle+" -- ["+fuente.properties.codigo+"]";
+	    let calleli = document.createElement("li");
+		calleli.innerHTML=falla.properties.nombre+" -- ["+falla.properties.seccion+"]";
 		console.log(calleli);
 	    // Lo anyadimos
 	    listado.appendChild(calleli);	    
