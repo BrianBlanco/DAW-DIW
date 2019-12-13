@@ -41,24 +41,29 @@ function buscar() {
 		// Filtramos los resultados con el filtro definido anteriormente
 
 		const resultado = respuesta.features;
-		let listado = document.createElement("ul");
+		const divResultados = document.querySelector(".resultados");
 		// Una vez tenemos el listado filtrado pasamos a crear
 		// cada uno de los <li> que representan
-		// Por cada uno de ellos 
+		// Por cada uno de ellos
 		resultado.forEach(falla => {
-			// Creamos un <li>
+
 			let divFalla = document.createElement("div");
-			divFalla.innerHTML = falla.properties.nombre;
-			
+			divFalla.classList.add("cuadroFallas");
+
 			let imgFalla = document.createElement("img");
 			imgFalla.src = falla.properties.boceto;
 
+			let nombreFalla = document.createElement("span");
+			nombreFalla.innerText = falla.properties.nombre;
+
+
 			divFalla.appendChild(imgFalla);
-			listado.appendChild(divFalla);
+			divFalla.appendChild(nombreFalla);
+			divResultados.appendChild(divFalla);
 		});
+
 		// Establecemos el listado en la Web
-		document.querySelector(".resultados").innerHTML = "";
-		document.querySelector(".resultados").appendChild(listado);
+		//document.querySelector(".resultados").innerHTML = "";
 	});
 }
 
