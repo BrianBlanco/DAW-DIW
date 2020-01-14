@@ -8,7 +8,7 @@
 // Algunos valores
 
 const fuentesUrl = "http://mapas.valencia.es/lanzadera/opendata/Monumentos_falleros/JSON";
-
+let resultadoJSON;
 // Esta es la funcion de filtrado para
 // obtener tan solo los elementos que cumplen
 // una serie de requisitos.
@@ -18,12 +18,28 @@ function filtroLetra(elemento) {
 	return elemento.properties.calle.startsWith(letra);
 }
 
+function rellenarSection() {
+	let secciones = [];
+	for (let i = 0; i < resultadoJSON.length; i++) {
+		let seccion = resultadoJSON[i].properties.seccion;
 
-// Pasa a mayuscula el texto de propio input
-// se lanza cada vez que se realiza una insercion en
-// el texto del nombre.
-function toUpp() {
-	document.querySelector(`input[name="calle"]`).value = document.querySelector(`input[name="calle"]`).value.toUpperCase();
+		if (!secciones.includes(seccion)) {
+			secciones.push(resultadoJSON[i].properties.seccion);
+		}
+	}
+	secciones.sort();
+	let sectionFallas = document.getElementById("secciones");
+
+	for (let i = 0; i < secciones.length; i++) {
+		let option = document.createElement("option");
+		option.innerText = secciones[i];
+		option.value = secciones[i];
+		console.log(option);
+		sectionFallas.appendChild(option);
+		console.log(sectionFallas);
+
+	}
+	console.log(secciones);
 }
 
 function buscar() {
@@ -38,42 +54,39 @@ function buscar() {
 		// Y entonces
 	}).then(respuesta => {
 		// Filtramos los resultados con el filtro definido anteriormente
-
-		const resultado = respuesta.features;
-		const divResultados = document.querySelector(".resultados");
-		// Una vez tenemos el listado filtrado pasamos a crear
-		// cada uno de los <li> que representan
-		// Por cada uno de ellos
-		resultado.forEach(falla => {
-
-			let divFalla = document.createElement("div");
-			divFalla.classList.add("cuadroFallas");
-
-			let imgFalla = document.createElement("img");
-			imgFalla.src = falla.properties.boceto;
-
-			let nombreFalla = document.createElement("span");
-			nombreFalla.innerText = falla.properties.nombre;
-
-
-			divFalla.appendChild(imgFalla);
-			divFalla.appendChild(nombreFalla);
-			divResultados.appendChild(divFalla);
-		});
-
-		// Establecemos el listado en la Web
-		//document.querySelector(".resultados").innerHTML = "";
+		resultadoJSON = respuesta.features;
+		crearFallas(respuesta);
+		rellenarSection();
 	});
 }
 
+function crearFallas(respuesta) {
+
+	const resultado = respuesta.features;
+	const divResultados = document.querySelector(".resultados");
+	// Una vez tenemos el listado filtrado pasamos a crear
+	// cada uno de los <li> que representan
+	// Por cada uno de ellos
+	resultado.forEach(falla => {
+
+		let divFalla = document.createElement("div");
+		divFalla.classList.add("cuadroFallas");
+
+		let imgFalla = document.createElement("img");
+		imgFalla.src = falla.properties.boceto;
+
+		let nombreFalla = document.createElement("span");
+		nombreFalla.innerText = falla.properties.nombre;
+
+		divFalla.appendChild(imgFalla);
+		divFalla.appendChild(nombreFalla);
+		divResultados.appendChild(divFalla);
+	});
+
+}
 function init() {
-
-	// Binding de los eventos correspondientes.
-
-	// Click en el boton de buscar
-	document.querySelector(`input[type="button"]`).addEventListener("click", buscar);
-	// Texto cambia en el <input>
-	document.querySelector(`input[type="text"]`).addEventListener("input", toUpp);
+	document.getElementById("secciones").addEventListener("onchange", buscar);
+	buscar();
 }
 
 // The mother of the lamb.
