@@ -34,12 +34,8 @@ function rellenarSection() {
 		let option = document.createElement("option");
 		option.innerText = secciones[i];
 		option.value = secciones[i];
-		console.log(option);
 		sectionFallas.appendChild(option);
-		console.log(sectionFallas);
-
 	}
-	console.log(secciones);
 }
 
 function buscar() {
