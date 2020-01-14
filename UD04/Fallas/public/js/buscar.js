@@ -26,7 +26,6 @@ function toUpp() {
 	document.querySelector(`input[name="calle"]`).value = document.querySelector(`input[name="calle"]`).value.toUpperCase();
 }
 
-
 function buscar() {
 
 	// Obtenemos el JSON que esta definido
