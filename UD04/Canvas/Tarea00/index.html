@@ -31,7 +31,7 @@
 
         for (let i = 1; i < 65; i++) {
 
-            if (colorCasilla == true) {
+            if (colorCasilla) {
                 ctx.fillStyle = "yellow";
                 colorCasilla = false;
             } else {
@@ -47,7 +47,7 @@
                 y += tamanyoCasilla;
                 x = 0;
 
-                if (colorCasilla == true) {
+                if (colorCasilla) {
                     colorCasilla = false;
                 } else {
                     colorCasilla = true;
